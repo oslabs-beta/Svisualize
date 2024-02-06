@@ -1,4 +1,8 @@
+
 <script>
+  import { onMount } from 'svelte';
+
+
   import Pokedisplay from "./components/pokedisplay.svelte";
   import Tree from "./d3/tree.svelte";
   let pokes = [
@@ -19,30 +23,14 @@
     }
   ]
 
-  let componentStructure = [
-    {
-      name: 'App',
-      children: [
-        {
-          name: 'Pokedisplay',
-          children: [
-            {
-              name: 'Pokemon',
-              children: [
-                {
-                  name: 'Card',
-                  children: []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          name: 'pokemart',
-        }
-      ]
-    }
-  ]
+  import { generateComponentStructure } from "./d3/generateStructure";
+  const projectDirectory = '/Users/lumeng/Desktop/Svisualize/Visualizer';
+  let componentStructure;
+
+  onMount(async () => {
+    componentStructure = await generateComponentStructure(projectDirectory + '/src/App.svelte');
+    console.log(JSON.stringify(componentStructure, null, 2));
+  });
 </script>
 
 <main>
