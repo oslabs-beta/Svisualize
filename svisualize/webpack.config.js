@@ -14,7 +14,7 @@ const extensionConfig = {
 
   entry: {
     // the entry point of this extension, 📖 -> https://webpack.js.org/configuration/entry-context/
-    extensions: "./src/extension.ts",
+    extension: "./src/extension.ts",
     App: "./src/App.js",
   },
   output: {
