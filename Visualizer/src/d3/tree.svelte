@@ -57,6 +57,7 @@ svg.selectAll('text')
 
 // approach - text should be attahced to each parent?
 
+   
 });
 </script>
 
