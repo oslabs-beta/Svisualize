@@ -1,7 +1,6 @@
-
 <script>
-  import Pokedisplay from "./components/pokedisplay.svelte";
-  import Tree from "./d3/tree.svelte";
+  import Pokedisplay from './components/pokedisplay.svelte';
+  import Tree from './d3/tree.svelte';
   let pokes = [
     {
       id: 1,
@@ -17,8 +16,8 @@
       id: 3,
       name: 'Venusaur',
       type: 'grass',
-    }
-  ]
+    },
+  ];
 
   let componentStructure = [
     {
@@ -32,18 +31,21 @@
               children: [
                 {
                   name: 'Card',
-                  children: []
-                }
-              ]
-            }
-          ]
+                  children: [],
+                },
+              ],
+            },
+          ],
         },
         {
-          name: 'pokemart',
-        }
-      ]
-    }
-  ]
+          name: 'Pokemart',
+        },
+        {
+          name: 'Pokecenter',
+        },
+      ],
+    },
+  ];
 </script>
 
 <main>
@@ -58,7 +60,8 @@
   <h1>Vite + Svelte</h1> -->
 
   <main>
-    <Pokedisplay {pokes} />
+    <!-- <Pokedisplay {pokes} /> -->
+    <h1>Hello World</h1>
     <Tree {componentStructure} />
   </main>
 
@@ -73,4 +76,3 @@
 
 <style>
 </style>
-
