@@ -16,12 +16,17 @@
       {
         "command": "svisualize.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "svisualize.render",
+        "category": "Svisualize",
+        "title": "render"
       }
     ]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
-    "compile": "webpack",
+    "compile": "webpack --config webpack.config.js",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
@@ -31,17 +36,20 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.86.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.86.0",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.9",
     "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
+    "svelte": "^4.2.10",
+    "svelte-loader": "^3.1.9",
     "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
     "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4",
-    "@vscode/test-cli": "^0.0.4",
-    "@vscode/test-electron": "^2.3.9"
+    "d3": "^7.8.5"
   }
 }
