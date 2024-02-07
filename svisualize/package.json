@@ -16,6 +16,11 @@
       {
         "command": "svisualize.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "svisualize.svisualize",
+        "category": "Svisualize",
+        "title": "render"
       }
     ]
   },
