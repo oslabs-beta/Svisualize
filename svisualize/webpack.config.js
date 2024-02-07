@@ -15,7 +15,7 @@ const extensionConfig = {
   entry: {
     // the entry point of this extension, 📖 -> https://webpack.js.org/configuration/entry-context/
     extensions: "./src/extension.ts",
-    demo: "./src/demo.js",
+    demo: "./src/App.js",
   },
   output: {
     // the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/

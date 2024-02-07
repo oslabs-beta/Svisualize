@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
 			// const extensionId = require('../package.json').name;
 			
 			//retrieve path of demo file from demo.js
-			const scriptPath = vscode.Uri.file(path.join(__dirname, 'demo.js'));
+			const scriptPath = vscode.Uri.file(path.join(__dirname, 'App.js'));
 			//change script path to webviewuri
 			const scriptUri = panel.webview.asWebviewUri(scriptPath);
 			const demoJS = `<script src="${scriptUri}"></script>`;
@@ -70,9 +70,9 @@ function getWebviewContent(filePath:string): string{
 			<title>Svisualize</title>
 	</head>
 	<body>
+			<div id="app"></div>
 			<div id="d3-content">
 				${filePath}
-				<h1>SVISUALIZE</h1>
 			</div>
 	</body>
 	</html>`;
