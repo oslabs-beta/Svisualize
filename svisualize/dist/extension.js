@@ -35,25 +35,13 @@ exports.deactivate = exports.activate = void 0;
 const vscode = __importStar(__webpack_require__(1));
 const path = __webpack_require__(2);
 const SidebarProvider_1 = __webpack_require__(3);
-const traverseDirectory_1 = __webpack_require__(5);
+const parseFile_1 = __webpack_require__(5);
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 function activate(context) {
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "svisualize" is now active!');
-    context.subscriptions.push(vscode.commands.registerCommand('svisualize.search', async () => {
-        const folders = vscode.workspace.workspaceFolders;
-        if (folders) {
-            folders.forEach((folder) => {
-                const rootPath = folder.uri.fsPath;
-                (0, traverseDirectory_1.traverseDirectory)(rootPath);
-            });
-        }
-        else {
-            vscode.window.showErrorMessage('No workspace opened');
-        }
-    }));
     const sidebarProvider = new SidebarProvider_1.SidebarProvider(context.extensionUri);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider('svisualize-sidebar', sidebarProvider));
     context.subscriptions.push(vscode.commands.registerCommand('svisualize.refresh', async () => {
@@ -63,27 +51,49 @@ function activate(context) {
             vscode.commands.executeCommand('workbench.action.webview.openDeveloperTools');
         }, 500);
     }));
-    //create a command to render d3 tree in webview
-    context.subscriptions.push(vscode.commands.registerCommand('svisualize.render', async () => {
-        //show a message on render that asks users to insert file path of tree root
-        const rootPath = await vscode.window.showInformationMessage('Enter File Path of Tree Root', 'Entered');
-        if (rootPath === 'Entered') {
-            const panel = vscode.window.createWebviewPanel('svisualize', 'Svisualize', vscode.ViewColumn.One, {
-                //enable js scripts in webview
-                enableScripts: true,
+    context.subscriptions.push(vscode.commands.registerCommand('svisualize.search', async () => {
+        const folders = vscode.workspace.workspaceFolders;
+        if (folders) {
+            folders.forEach((folder) => {
+                const rootPath = folder.uri.fsPath;
+                (0, parseFile_1.parseFile)(rootPath);
             });
-            //grab extensionId from package.json
-            // const extensionId = require('../package.json').name;
-            //retrieve path of demo file from demo.js
-            const scriptPath = vscode.Uri.file(path.join(__dirname, 'App.js'));
-            //change script path to webviewuri
-            const scriptUri = panel.webview.asWebviewUri(scriptPath);
-            const demoJS = `<script src="${scriptUri}"></script>`;
-            console.log('demo script', demoJS);
-            console.log('inside webview');
-            panel.webview.html = getWebviewContent(demoJS);
+        }
+        else {
+            vscode.window.showErrorMessage('No workspace opened');
         }
     }));
+    //create a command to render d3 tree in webview
+    // context.subscriptions.push(
+    //   vscode.commands.registerCommand('svisualize.render', async () => {
+    //     //show a message on render that asks users to insert file path of tree root
+    //     const rootPath = await vscode.window.showInformationMessage(
+    //       'Enter File Path of Tree Root',
+    //       'Entered'
+    //     );
+    //     if (rootPath === 'Entered') {
+    //       const panel = vscode.window.createWebviewPanel(
+    //         'svisualize',
+    //         'Svisualize',
+    //         vscode.ViewColumn.One,
+    //         {
+    //           //enable js scripts in webview
+    //           enableScripts: true,
+    //         }
+    //       );
+    //       //grab extensionId from package.json
+    //       // const extensionId = require('../package.json').name;
+    //       //retrieve path of demo file from demo.js
+    //       const scriptPath = vscode.Uri.file(path.join(__dirname, 'App.js'));
+    //       //change script path to webviewuri
+    //       const scriptUri = panel.webview.asWebviewUri(scriptPath);
+    //       const demoJS = `<script src="${scriptUri}"></script>`;
+    //       console.log('demo script', demoJS);
+    //       console.log('inside webview');
+    //       panel.webview.html = getWebviewContent(demoJS);
+    //     }
+    //   })
+    // );
 }
 exports.activate = activate;
 //declare a function that renders webview content. render an html file
@@ -246,11 +256,91 @@ exports.getNonce = getNonce;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parseFile = void 0;
+const fs = __webpack_require__(6);
+// const svelte = require('svelte/compiler');
+// const { parse } = require('svelte/compiler');
+const path = __webpack_require__(2);
+const { traverseDirectory } = __webpack_require__(7);
+// will use fs.readfilesync to check if there are any import statments
+// create a abstract syntax tree to parse svelte file
+// traverse ast to find children of component
+// push children to array and return result
+function parseFile(rootPath) {
+    //   fs.readFile(
+    //     './Jason-Caleb-parsing-test/demo-components2.0/App.svelte',
+    //     'utf-8',
+    //     (err, source) => {
+    //       if (err) {
+    //         console.error('Error reading Svelte source file:', err);
+    //         return;
+    //       }
+    //       // Parse the Svelte source code
+    //       // const ast = parse(source);
+    //       // Define route handler to send the parsed AST
+    //       let correctPath;
+    const filePaths = traverseDirectory(rootPath); //this will return an array of all file paths that end in .svelte
+    let root; //raw code from App.svelte
+    //parse through directories taken from traverDirectory function and find r
+    filePaths.forEach((fileURI) => {
+        if (path.extname(fileURI) === '.svelte' && fileURI.includes('App.svelte')) {
+            root = fs.readFileSync(fileURI, 'utf-8');
+        }
+    });
+    // let sourceString = JSON.stringify(source);
+    // const children = [];
+    // function parseFunc(string) {
+    //   let words = sourceString
+    //     .split(/[ ;'"]+/)
+    //     .filter((word) => word.trim() !== '');
+    //   for (let i = 0; i < words.length; i++) {
+    //     if (words[i] === 'import') {
+    //       children.push(words[i + 1]);
+    //       for (let j = 0; j < filePaths.length; j++) {
+    //         if (filePaths[j].includes(words[i + 3])) {
+    //           const correctPath = filePaths[j];
+    //           fs.readFile(correctPath, 'utf-8', (err, source) => {
+    //             if (err) {
+    //               console.error('Error reading Svelte source file:', err);
+    //               return;
+    //             }
+    //             let newSourceString = JSON.stringify(source);
+    //             //children.push(words[i + 1]);
+    //             //console.log(children);
+    //             // Consider if you really need recursion here
+    //             // return parseFunc(newSourceString);
+    //           });
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // parseFunc(sourceString);
+    // //console.log(words);
+    //     }
+    //   );
+}
+exports.parseFile = parseFile;
+
+
+/***/ }),
+/* 6 */
+/***/ ((module) => {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 7 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.traverseDirectory = void 0;
 const fs = __webpack_require__(6);
 const path = __webpack_require__(2);
 function traverseDirectory(dir) {
     const files = fs.readdirSync(dir);
+    const filePathArray = [];
     files.forEach((file) => {
         const filePath = path.join(dir, file);
         const stat = fs.statSync(filePath);
@@ -260,24 +350,20 @@ function traverseDirectory(dir) {
             }
         }
         else if (path.extname(filePath) === '.svelte') {
-            console.log(filePath);
-            console.log(file);
-            if (file === 'App.svelte') {
-                console.log('found it');
-                const data = fs.readFileSync(filePath, 'utf-8');
-                console.log(data);
-            }
+            filePathArray.push(filePath);
+            // if (file === 'App.svelte') {
+            //   const data = fs.readFileSync(filePath, 'utf-8');
+            //   console.log(data);
+            // }
         }
     });
+    console.log(filePathArray);
+    return filePathArray;
 }
 exports.traverseDirectory = traverseDirectory;
+//need to grab all the file path
+//stretch goal: we need to add additional filters on line 19 in case their root directory is not named App.svelte
 
-
-/***/ }),
-/* 6 */
-/***/ ((module) => {
-
-module.exports = require("fs");
 
 /***/ })
 /******/ 	]);
