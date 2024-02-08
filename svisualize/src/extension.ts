@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 const path = require('path');
 import { SidebarProvider } from './SidebarProvider';
 import { traverseDirectory } from './traverseDirectory';
+import { parseFile } from './parseFile';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -41,7 +42,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (folders) {
         folders.forEach((folder) => {
           const rootPath = folder.uri.fsPath;
-          traverseDirectory(rootPath);
+          parseFile(rootPath);
         });
       } else {
         vscode.window.showErrorMessage('No workspace opened');

@@ -3,6 +3,7 @@ const path = require('path');
 
 export function traverseDirectory(dir: string) {
   const files = fs.readdirSync(dir);
+  const filePathArray: string[] = [];
 
   files.forEach((file: string) => {
     const filePath = path.join(dir, file);
@@ -13,13 +14,17 @@ export function traverseDirectory(dir: string) {
         traverseDirectory(filePath);
       }
     } else if (path.extname(filePath) === '.svelte') {
-      console.log(filePath);
-      if (file === 'App.svelte') {
-        const data = fs.readFileSync(filePath, 'utf-8');
-        console.log(data);
-      }
+      filePathArray.push(filePath);
+      // if (file === 'App.svelte') {
+      //   const data = fs.readFileSync(filePath, 'utf-8');
+      //   console.log(data);
+      // }
     }
   });
+  console.log(filePathArray);
+  return filePathArray;
 }
+
+//need to grab all the file path
 
 //stretch goal: we need to add additional filters on line 19 in case their root directory is not named App.svelte
