@@ -12,20 +12,6 @@ export function activate(context: vscode.ExtensionContext) {
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "svisualize" is now active!');
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.search', async () => {
-      const folders = vscode.workspace.workspaceFolders;
-      if (folders) {
-        folders.forEach((folder) => {
-          const rootPath = folder.uri.fsPath;
-          traverseDirectory(rootPath);
-        });
-      } else {
-        vscode.window.showErrorMessage('No workspace opened');
-      }
-    })
-  );
-
   const sidebarProvider = new SidebarProvider(context.extensionUri);
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
@@ -49,41 +35,55 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
-  //create a command to render d3 tree in webview
   context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.render', async () => {
-      //show a message on render that asks users to insert file path of tree root
-      const rootPath = await vscode.window.showInformationMessage(
-        'Enter File Path of Tree Root',
-        'Entered'
-      );
-
-      if (rootPath === 'Entered') {
-        const panel = vscode.window.createWebviewPanel(
-          'svisualize',
-          'Svisualize',
-          vscode.ViewColumn.One,
-          {
-            //enable js scripts in webview
-            enableScripts: true,
-          }
-        );
-
-        //grab extensionId from package.json
-        // const extensionId = require('../package.json').name;
-
-        //retrieve path of demo file from demo.js
-        const scriptPath = vscode.Uri.file(path.join(__dirname, 'App.js'));
-        //change script path to webviewuri
-        const scriptUri = panel.webview.asWebviewUri(scriptPath);
-        const demoJS = `<script src="${scriptUri}"></script>`;
-        console.log('demo script', demoJS);
-
-        console.log('inside webview');
-        panel.webview.html = getWebviewContent(demoJS);
+    vscode.commands.registerCommand('svisualize.search', async () => {
+      const folders = vscode.workspace.workspaceFolders;
+      if (folders) {
+        folders.forEach((folder) => {
+          const rootPath = folder.uri.fsPath;
+          traverseDirectory(rootPath);
+        });
+      } else {
+        vscode.window.showErrorMessage('No workspace opened');
       }
     })
   );
+
+  //create a command to render d3 tree in webview
+  // context.subscriptions.push(
+  //   vscode.commands.registerCommand('svisualize.render', async () => {
+  //     //show a message on render that asks users to insert file path of tree root
+  //     const rootPath = await vscode.window.showInformationMessage(
+  //       'Enter File Path of Tree Root',
+  //       'Entered'
+  //     );
+
+  //     if (rootPath === 'Entered') {
+  //       const panel = vscode.window.createWebviewPanel(
+  //         'svisualize',
+  //         'Svisualize',
+  //         vscode.ViewColumn.One,
+  //         {
+  //           //enable js scripts in webview
+  //           enableScripts: true,
+  //         }
+  //       );
+
+  //       //grab extensionId from package.json
+  //       // const extensionId = require('../package.json').name;
+
+  //       //retrieve path of demo file from demo.js
+  //       const scriptPath = vscode.Uri.file(path.join(__dirname, 'App.js'));
+  //       //change script path to webviewuri
+  //       const scriptUri = panel.webview.asWebviewUri(scriptPath);
+  //       const demoJS = `<script src="${scriptUri}"></script>`;
+  //       console.log('demo script', demoJS);
+
+  //       console.log('inside webview');
+  //       panel.webview.html = getWebviewContent(demoJS);
+  //     }
+  //   })
+  // );
 }
 
 //declare a function that renders webview content. render an html file

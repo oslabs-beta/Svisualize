@@ -14,12 +14,12 @@ export function traverseDirectory(dir: string) {
       }
     } else if (path.extname(filePath) === '.svelte') {
       console.log(filePath);
-      console.log(file);
       if (file === 'App.svelte') {
-        console.log('found it');
         const data = fs.readFileSync(filePath, 'utf-8');
         console.log(data);
       }
     }
   });
 }
+
+//stretch goal: we need to add additional filters on line 19 in case their root directory is not named App.svelte
