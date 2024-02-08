@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 const path = require('path');
 import { SidebarProvider } from './SidebarProvider';
+import { traverseDirectory } from './traverseDirectory';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -10,6 +11,20 @@ export function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "svisualize" is now active!');
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('svisualize.search', async () => {
+      const folders = vscode.workspace.workspaceFolders;
+      if (folders) {
+        folders.forEach((folder) => {
+          const rootPath = folder.uri.fsPath;
+          traverseDirectory(rootPath);
+        });
+      } else {
+        vscode.window.showErrorMessage('No workspace opened');
+      }
+    })
+  );
 
   const sidebarProvider = new SidebarProvider(context.extensionUri);
   context.subscriptions.push(
@@ -33,7 +48,6 @@ export function activate(context: vscode.ExtensionContext) {
       }, 500);
     })
   );
-
 
   //create a command to render d3 tree in webview
   context.subscriptions.push(
