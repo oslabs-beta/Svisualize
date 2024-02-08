@@ -37,6 +37,7 @@
 
   <style>
     h1 {
-      color: pink;
+      color: red;
+      text-align: center;
     }
   </style>

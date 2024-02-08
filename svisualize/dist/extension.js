@@ -35,12 +35,25 @@ exports.deactivate = exports.activate = void 0;
 const vscode = __importStar(__webpack_require__(1));
 const path = __webpack_require__(2);
 const SidebarProvider_1 = __webpack_require__(3);
+const traverseDirectory_1 = __webpack_require__(5);
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 function activate(context) {
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "svisualize" is now active!');
+    context.subscriptions.push(vscode.commands.registerCommand('svisualize.search', async () => {
+        const folders = vscode.workspace.workspaceFolders;
+        if (folders) {
+            folders.forEach((folder) => {
+                const rootPath = folder.uri.fsPath;
+                (0, traverseDirectory_1.traverseDirectory)(rootPath);
+            });
+        }
+        else {
+            vscode.window.showErrorMessage('No workspace opened');
+        }
+    }));
     const sidebarProvider = new SidebarProvider_1.SidebarProvider(context.extensionUri);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider('svisualize-sidebar', sidebarProvider));
     context.subscriptions.push(vscode.commands.registerCommand('svisualize.refresh', async () => {
@@ -226,6 +239,45 @@ function getNonce() {
 }
 exports.getNonce = getNonce;
 
+
+/***/ }),
+/* 5 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.traverseDirectory = void 0;
+const fs = __webpack_require__(6);
+const path = __webpack_require__(2);
+function traverseDirectory(dir) {
+    const files = fs.readdirSync(dir);
+    files.forEach((file) => {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+        if (stat.isDirectory()) {
+            if (file !== 'node_modules') {
+                traverseDirectory(filePath);
+            }
+        }
+        else if (path.extname(filePath) === '.svelte') {
+            console.log(filePath);
+            console.log(file);
+            if (file === 'App.svelte') {
+                console.log('found it');
+                const data = fs.readFileSync(filePath, 'utf-8');
+                console.log(data);
+            }
+        }
+    });
+}
+exports.traverseDirectory = traverseDirectory;
+
+
+/***/ }),
+/* 6 */
+/***/ ((module) => {
+
+module.exports = require("fs");
 
 /***/ })
 /******/ 	]);

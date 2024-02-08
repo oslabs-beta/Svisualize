@@ -68,10 +68,11 @@
       .append('path')
       .attr('class', 'link')
       .attr('fill', 'none')
-      .attr('stroke', '#333')
+      .attr('stroke', '#fff')
       .attr('stroke-width', 1)
       .attr('d', diagonal);
   });
 </script>
 
 <div id="tree-container"></div>
+
