@@ -184,7 +184,9 @@ class SidebarProvider {
         //   vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
         // );
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'dist', 'sidebar.js'));
-        const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/sidebar.css'));
+        // const styleMainUri = webview.asWebviewUri(
+        //   vscode.Uri.joinPath(this._extensionUri, 'dist', 'sidebar.css')
+        // );
         // Use a nonce to only allow a specific script to be run.
         const nonce = (0, getNonce_1.getNonce)();
         return `<!DOCTYPE html>

@@ -67,6 +67,7 @@
     "@vscode/test-electron": "^2.3.9",
     "d3": "^7.8.5",
     "eslint": "^8.56.0",
+    "mini-css-extract-plugin": "^2.8.0",
     "svelte": "^4.2.10",
     "svelte-loader": "^3.1.9",
     "ts-loader": "^9.5.1",

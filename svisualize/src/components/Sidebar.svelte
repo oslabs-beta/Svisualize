@@ -34,3 +34,9 @@
       <h1>See your component structure below!</h1>
       <Tree {componentStructure}/>
   </main>
+
+  <style>
+    h1 {
+      color: pink;
+    }
+  </style>

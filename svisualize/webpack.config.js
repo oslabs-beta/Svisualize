@@ -3,6 +3,7 @@
 'use strict';
 
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
@@ -61,10 +62,15 @@ const extensionConfig = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'sidebar.css',
+    }),
+  ],
   devtool: 'nosources-source-map',
   infrastructureLogging: {
     level: 'log', // enables logging required for problem matchers
