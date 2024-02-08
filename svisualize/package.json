@@ -75,6 +75,8 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "css-loader": "^6.10.0",
+    "style-loader": "^3.3.4"
   }
 }
