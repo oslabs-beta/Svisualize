@@ -21,7 +21,6 @@ export function traverseDirectory(dir: string) {
       // }
     }
   });
-  console.log(filePathArray);
   return filePathArray;
 }
 
