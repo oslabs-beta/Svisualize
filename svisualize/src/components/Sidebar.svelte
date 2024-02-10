@@ -1,6 +1,7 @@
 <script>
     import Tree from "./Tree.svelte";
-    let componentStructure = [
+    import componentStrcuture  from "../componentStructure";
+    let structure = [
       {
         name: 'App',
         children: [
@@ -32,7 +33,7 @@
     
   <main>
       <h1>See your component structure below!</h1>
-      <Tree {componentStructure}/>
+      <Tree {structure}/>
   </main>
 
   <style>

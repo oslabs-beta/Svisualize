@@ -1,11 +1,26 @@
 const fs = require('fs');
 const path = require('path');
 const { traverseDirectory } = require('./traverseDirectory');
-
+const componentStrcuture = require('./componentStructure');
 // will use fs.readfilesync to check if there are any import statments
 // create a abstract syntax tree to parse svelte file
 // traverse ast to find children of component
 // push children to array and return result
+class TreeNode {
+  name: string;
+  children: object[];
+
+  constructor(name: string) {
+    this.name = name;
+    this.children = [];
+  }
+}
+
+const componentStructure = new TreeNode('App');
+  // Define a class
+
+
+
 export function parseFile(rootPath: string) {
   const filePaths = traverseDirectory(rootPath); //this will return an array of all file paths that end in .svelte
 
@@ -20,18 +35,8 @@ export function parseFile(rootPath: string) {
 
   //stretch goal: we need to add additional filters on line 30 in case their root directory is not named App.svelte
 
-  // Define a class
-  class TreeNode {
-    name: string;
-    children: object[];
 
-    constructor(name: string) {
-      this.name = name;
-      this.children = [];
-    }
-  }
-
-  const componentStructure = new TreeNode('App');
+  
 
   let correctPath;
   let rootString = JSON.stringify(root);
@@ -83,3 +88,5 @@ export function parseFile(rootPath: string) {
   console.log(componentStructure);
   return componentStructure;
 }
+
+

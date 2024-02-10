@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import * as d3 from 'd3';
-  export let componentStructure;
+  export let structure;
 
   onMount(() => {
     let height = 2000;
@@ -15,7 +15,7 @@
       .append('g')
       .attr('transform', 'translate(50,50)');
 
-    const root = d3.hierarchy(componentStructure[0]);
+    const root = d3.hierarchy(structure[0]);
     //const roots = d3.hierarchy(root);
     // console.log(componentStructure[0]);
     // console.log(root);
