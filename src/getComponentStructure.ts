@@ -1,19 +1,16 @@
 const fs = require('fs');
 const path = require('path');
-const { traverseDirectory } = require('./traverseDirectory');
+const { getRootContent } = require('./rootContent');
+const { getSvelteFiles } = require('./getSvelteFiles');
 
-export function parseFile(rootPath: string) {
-  const filePaths = traverseDirectory(rootPath); //this will return an array of all file paths that end in .svelte
-  let root; //raw code from App.svelte
+export function getComponentStructure(rootPath: string) {
 
-  //parse through directories taken from traverDirectory function and find root
-  filePaths.forEach((fileURI: string) => {
-    if (path.extname(fileURI) === '.svelte' && fileURI.includes('App.svelte')) {
-      root = fs.readFileSync(fileURI, 'utf-8');
-    }
-  });
-
-  // Define a class
+// getting root from getRootContent (App.svelte)
+ const root = getRootContent(rootPath);
+ // getting filePaths array containing the file paths of all svelte files in the application
+ const filePaths = getSvelteFiles(rootPath);
+ 
+  // Define a class constructor to store files in a hierarchical structure
   class TreeNode {
     name: string;
     children: object[];
@@ -23,30 +20,23 @@ export function parseFile(rootPath: string) {
       this.children = [];
     }
   }
-
+// taking the file contents of App.svelte and turning it into a string
+  const rootString = JSON.stringify(root);
   const componentStructure = new TreeNode('App');
-
-  let correctPath;
-  let rootString = JSON.stringify(root);
-
-  function getFilePaths(rootPath: string) {}
 
   function parseFunc(fileContents = rootString, currTree = componentStructure) {
     //only parse through text within script tags
-    let invoked = 0;
     for (let i = 0; i < fileContents.length; i++) {
       //if </script
       if (fileContents[i] === '<') {
         if (fileContents[i + 1] === '/') {
-          if (fileContents[i + 2] === 's') {
+            // end the slice at the end of the closing carrot
             fileContents = fileContents.slice(0, i + 9);
+            // exit the for loop that contains all export contents - contains all characters from opening script tags to closing script tags 
             break;
-          }
         }
       }
-      //splice after script
     }
-
     //split file contents' into an array
     const fileContentsArr = fileContents
       .split(/[ ;'"]+/)
@@ -60,11 +50,13 @@ export function parseFile(rootPath: string) {
         const newTreeNode = new TreeNode(fileContentsArr[i + 1]);
         //declare a var to grab path [i + 3]
         currTree.children.push(newTreeNode);
+        // iterate through the array of file paths 
         for (let j = 0; j < filePaths.length; j++) {
+          // if the file name is found in the filePaths array, run fs.readFileSync on that path 
           if (filePaths[j].includes(fileContentsArr[i + 3])) {
-            const correctPath = filePaths[j];
-            const childData = fs.readFileSync(correctPath, 'utf-8');
+            const childData = fs.readFileSync(filePaths[j], 'utf-8');
             let newSourceString = JSON.stringify(childData);
+            // invoke parseFunc passing in JSON string of childData contents and newTreeNode 
             parseFunc(newSourceString, newTreeNode);
           }
         }
@@ -72,6 +64,5 @@ export function parseFile(rootPath: string) {
     }
   }
   parseFunc();
-  console.log(componentStructure);
   return componentStructure;
 }
