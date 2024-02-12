@@ -5,8 +5,8 @@
 
 <p align="center">
 Svisualize is a Svelte component visualizer for developers to see the shape of their application as they code. <br/>Find out more at <a href="">Svisualize</a>!
+<br/>
 </p>
-
 
 <div align='center'>
 
