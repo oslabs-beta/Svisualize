@@ -41,8 +41,7 @@ With Svisualize you can:
 
 1. Install Svisualize from the extension marketplace
 2. Click on the tree icon on the activity bar to start the extension
-
-   (Insert gif here)
+(Insert gif here)
 
 ## Roadmap
 
