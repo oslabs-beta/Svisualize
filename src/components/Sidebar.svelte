@@ -18,15 +18,18 @@
   </script>
 
   <main>
-    <h1>See your component structure below!</h1>
-    {#if componentStructure.length > 0}
-      <Tree {componentStructure}/>
-    {/if}
+    <!-- <div class="background"> -->
+      <h1>See your component structure below!</h1>
+      {#if componentStructure.length > 0}
+        <Tree {componentStructure}/>
+      {/if}
+    <!-- </div> -->
   </main>
 
   <style>
+
     h1 {
-      color: red;
+      color: #e3ae52;
       text-align: center;
     }
   </style>
