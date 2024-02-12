@@ -1,28 +1,39 @@
 <script>
-    import { onMount } from "svelte";
     import Tree from "./Tree.svelte";
-  
-    let componentStructure = [];
-
-    onMount(() => {
-      window.addEventListener("message", (event) => {
-        const structure = event.data;
-        switch(structure.type){
-          case "structure":
-            componentStructure = [structure.value, ...componentStructure];
-            break;
-        }
-      })
-    })
+    import componentStrcuture  from "../componentStructure";
+    let structure = [
+      {
+        name: 'App',
+        children: [
+          {
+            name: 'Pokedisplay',
+            children: [
+              {
+                name: 'Pokemon',
+                children: [
+                  {
+                    name: 'Card',
+                    children: []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: 'pokemart',
+          },
+          {
+            name: 'pokenursery',
+          }
+        ]
+      }
+    ]
     
   </script>
-
+    
   <main>
-
-    <h1>See your component structure below!</h1>
-    {#if componentStructure.length > 0}
-      <Tree {componentStructure}/>
-    {/if}
+      <h1>See your component structure below!</h1>
+      <Tree {structure}/>
   </main>
 
   <style>

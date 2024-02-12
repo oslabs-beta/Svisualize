@@ -1,9 +1,28 @@
 const fs = require('fs');
 const path = require('path');
 const { traverseDirectory } = require('./traverseDirectory');
+const componentStrcuture = require('./componentStructure');
+// will use fs.readfilesync to check if there are any import statments
+// create a abstract syntax tree to parse svelte file
+// traverse ast to find children of component
+// push children to array and return result
+class TreeNode {
+  name: string;
+  children: object[];
+
+  constructor(name: string) {
+    this.name = name;
+    this.children = [];
+  }
+}
+
+const componentStructure = new TreeNode('App');
+  // Define a class
+
 
 export function parseFile(rootPath: string) {
   const filePaths = traverseDirectory(rootPath); //this will return an array of all file paths that end in .svelte
+
   let root; //raw code from App.svelte
 
   //parse through directories taken from traverDirectory function and find root
@@ -13,10 +32,7 @@ export function parseFile(rootPath: string) {
     }
   });
 
-  // Define a class
-  class TreeNode {
-    name: string;
-    children: object[];
+  //stretch goal: we need to add additional filters on line 30 in case their root directory is not named App.svelte
 
     constructor(name: string) {
       this.name = name;
@@ -51,7 +67,6 @@ export function parseFile(rootPath: string) {
     const fileContentsArr = fileContents
       .split(/[ ;'"]+/)
       .filter((word) => word.trim() !== '');
-
     for (let i = 0; i < fileContentsArr.length; i++) {
       //stop loop if file content text are outside of script tags
 
@@ -60,6 +75,8 @@ export function parseFile(rootPath: string) {
         const newTreeNode = new TreeNode(fileContentsArr[i + 1]);
         //declare a var to grab path [i + 3]
         currTree.children.push(newTreeNode);
+        // console.log(newTreeNode);
+
         for (let j = 0; j < filePaths.length; j++) {
           if (filePaths[j].includes(fileContentsArr[i + 3])) {
             const correctPath = filePaths[j];
@@ -72,5 +89,6 @@ export function parseFile(rootPath: string) {
     }
   }
   parseFunc();
+  console.log(componentStructure);
   return componentStructure;
 }
