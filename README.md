@@ -55,7 +55,7 @@ Svisualize is an open source project and we welcome iterations and contributions
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b newFeature`)
-3. Commit your Changes (`git commit -m 'Add a newFeature'`)
+3. Commit your Changes (`git commit -m 'added a newFeature'`)
 4. Push to the Branch (`git push origin newFeature`)
 5. Open a Pull Request
 
