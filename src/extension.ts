@@ -30,8 +30,8 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async () => {
-      const folders = vscode.workspace.workspaceFolders;
-      const rootPath = folders[0].uri.fsPath;
+      const folders = await vscode.workspace.workspaceFolders;
+      const rootPath = folders[0].uri.fsPath ;
       const result = await parseFile(rootPath);
       console.log(result);
       //we are sending a message containing result which is our final componentStructure to Svelte
@@ -41,6 +41,21 @@ export function activate(context: vscode.ExtensionContext) {
       });
     })
   );
+
+//   // Listen for changes in the webview's view state (e.g., when it's resized)
+//   sidebarProvider._view?.webview.onDidChangeViewState(event => {
+//   const newPanelViewState = event.webviewPanel.visible;
+//   if (newPanelViewState) {
+//       // The webview is now visible, resize it as needed
+//       const panelWidth = panel.webviewView.visibleColumn * vscode.window.activeTextEditor!.options.fontInfo.typicalHalfwidthCharacterWidth;
+//       const panelHeight = panel.webviewView.visibleRows * vscode.window.activeTextEditor!.options.fontInfo.lineHeight;
+//       resizePanel(panelWidth, panelHeight);
+//   }
+// });
+
+    //function that resizes panel
+ 
+
 }
 
 //declare a function that renders webview content. render an html file
