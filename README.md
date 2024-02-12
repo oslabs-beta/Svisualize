@@ -1,73 +1,53 @@
-# svisualize README
+# Svisualize
 
-Visualize your svelte components as you code using D3.
+<div align='center'>
 
-This is the README for your extension "svisualize". After writing up a brief description, we recommend including the following sections.
+[![Svelte](https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00)](https://svelte.dev/)
+[![D3.js](https://img.shields.io/badge/d3%20js-F9A03C?style=for-the-badge&logo=d3.js&logoColor=white)](https://d3js.org/)
+[![JavaScript](https://img.shields.io/badge/javascript-yellow?style=for-the-badge&logo=javascript&logoColor=white)](https://www.javascript.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node](https://img.shields.io/badge/-node-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+[![Jest](https://img.shields.io/badge/Jest-900C3F?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
+[![Webpack](https://img.shields.io/badge/Webpack-grey?style=for-the-badge&logo=webpack&logoColor=7DF9FF)](https://jestjs.io/)
 
-## Features
+</div>
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+<p align="center">
+Svisualize is a Svelte component visualizer for developers to see the shape of their application as they code. <br/>Find out more at <a href="">Svisualize</a>!
+</p>
 
-For example if there is an image subfolder under your extension project workspace:
+## Table of Contents
 
-\!\[feature X\]\(images/feature-x.png\)
+- 🚀 [Features](#features)
+- 📒 [Getting Started](#getting-started)
+- 🧰 [Examples](#examples)
+- 🛠 [Roadmap](#roadmap)
+- 🔗 [Contributions](#contributions)
+- 🙆 [Founders](#founders)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
-## Requirements
+## Roadmap
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Adding additional functionality within the visualizer
+- More UX/UI options within visualizer (e.g. changing color of nodes based on user preference)
 
-## Extension Settings
+## How to Contribute
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+The open-source community is awesome because of contributors like you. Your contributions are invaluable!
 
-For example:
+If you have a suggestion, fork the repo and make a pull request. You can also open an issue to discuss your idea. And, don't forget to give the project a star! Thanks!
 
-This extension contributes the following settings:
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)fgf
+5. Open a Pull Request
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
+## Founders
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Lumeng Li [Github](https://github.com/lumengli7) | [LinkedIn](www.linkedin.com/in/lumeng-li-90978b2a4)
+<br/>Caleb Belkin [Github](https://github.com/calebbelkin) | [LinkedIn](https://www.linkedin.com/)
+<br/>Kris Fragata [Github](https://github.com/krisfragata) | [LinkedIn](https://www.linkedin.com/)
+<br/>Jason Huang [Github](https://github.com/itsdayson) | [LinkedIn](https://www.linkedin.com/)
