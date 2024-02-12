@@ -1,2 +1,5 @@
 #ignore node modules
 node_modules/
+
+#ignore dist
+dist/
