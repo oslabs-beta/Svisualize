@@ -22,10 +22,25 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 
 - 🚀 [Features](#features)
 - 📒 [Getting Started](#getting-started)
-- 🧰 [Examples](#examples)
 - 🛠 [Roadmap](#roadmap)
-- 🔗 [Contributions](#contributions)
+- 🔗 [How to Contribute](#how-to-contribute)
 - 🙆 [Founders](#founders)
+
+
+## Features
+
+With Svisualize you can:
+
+- Visualize each Svelte component as a node on the component tree
+- Each node will be linked to its parent and children components
+
+
+## Getting Started
+
+1. Install Svisualize from the extension marketplace
+2. Click on the tree icon on the activity bar to start the extension
+
+   (Insert gif here)
 
 
 ## Roadmap
