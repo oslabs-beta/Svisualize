@@ -72,5 +72,6 @@ export function parseFile(rootPath: string) {
     }
   }
   parseFunc();
+  console.log(componentStructure);
   return componentStructure;
 }
