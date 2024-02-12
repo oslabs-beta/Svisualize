@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
-import { parseFile } from './parseFile';
+import { getComponentStructure } from './getComponentStructure';
 
 export function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendUri');
@@ -31,10 +31,14 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async () => {
       const folders = vscode.workspace.workspaceFolders;
+      //console.log('folders', folders);
+      // declare a constant rootPath and assign it the file paths in the specified folder
       const rootPath = folders[0].uri.fsPath;
-      const result = await parseFile(rootPath);
-      console.log(result);
-      //we are sending a message containing result which is our final componentStructure to Svelte
+      //console.log('root path', rootPath);
+      // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
+      const result = await getComponentStructure(rootPath);
+      //console.log('result', result);
+      // we are sending a message containing result which is our final componentStructure to Svelte
       sidebarProvider._view?.webview.postMessage({
         type: 'structure',
         value: result,
