@@ -1,4 +1,12 @@
-# Svisualize
+<div align="center">
+   <!-- PROJECT LOGO -->
+  <h1 align="center"><b>Svisualize</b></h1>
+</div>
+
+<p align="center">
+Svisualize is a Svelte component visualizer for developers to see the shape of their application as they code. <br/>Find out more at <a href="">Svisualize</a>!
+</p>
+
 
 <div align='center'>
 
@@ -7,24 +15,20 @@
 [![JavaScript](https://img.shields.io/badge/javascript-yellow?style=for-the-badge&logo=javascript&logoColor=white)](https://www.javascript.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node](https://img.shields.io/badge/-node-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+<br/>![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 [![Jest](https://img.shields.io/badge/Jest-900C3F?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
 [![Webpack](https://img.shields.io/badge/Webpack-grey?style=for-the-badge&logo=webpack&logoColor=7DF9FF)](https://jestjs.io/)
 
 </div>
 
-<p align="center">
-Svisualize is a Svelte component visualizer for developers to see the shape of their application as they code. <br/>Find out more at <a href="">Svisualize</a>!
-</p>
-
 ## Table of Contents
 
-- 🚀 [Features](#features)
-- 📒 [Getting Started](#getting-started)
+- 🖥️ [Features](#features)
+- ⚙️ [Getting Started](#getting-started)
 - 🛠 [Roadmap](#roadmap)
 - 🔗 [How to Contribute](#how-to-contribute)
-- 🙆 [Founders](#founders)
+- 👩🏻‍💻 [Founders](#founders)
 
 ## Features
 
@@ -66,7 +70,7 @@ Don't forget to give the project a star! Thank you for your support!
       <br />
       <sub><b>Lumeng Li</b></sub>
       <br />
-      <a href="www.linkedin.com/in/lumeng-li-90978b2a4">Linkedin</a> |
+      <a href="" style="font-size: 10px;">Linkedin</a> |
       <a href="https://github.com/lumengli7">GitHub</a>
     </td>
      <td align="center">
