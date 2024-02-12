@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const { getRootContent } = require('./rootContent');
-const { traverseDirectory } = require('./traverseDirectory');
+const { getSvelteFiles } = require('./getSvelteFiles');
 
-export function parseFile(rootPath: string) {
+export function getComponentStructure(rootPath: string) {
 
 // getting root from getRootContent (App.svelte)
  const root = getRootContent(rootPath);
  // getting filePaths array containing the file paths of all svelte files in the application
- const filePaths = traverseDirectory(rootPath);
+ const filePaths = getSvelteFiles(rootPath);
  
   // Define a class constructor to store files in a hierarchical structure
   class TreeNode {
