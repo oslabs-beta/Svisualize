@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { traverseDirectory } = require('./traverseDirectory');
 
+
 export function parseFile(rootPath: string) {
   const filePaths = traverseDirectory(rootPath); //this will return an array of all file paths that end in .svelte
   let root; //raw code from App.svelte
@@ -18,13 +19,8 @@ export function parseFile(rootPath: string) {
     name: string;
     children: object[];
 
-    constructor(name: string) {
-      this.name = name;
-      this.children = [];
-    }
-  }
 
-  const componentStructure = new TreeNode('App');
+  
 
   let correctPath;
   let rootString = JSON.stringify(root);
@@ -74,3 +70,5 @@ export function parseFile(rootPath: string) {
   parseFunc();
   return componentStructure;
 }
+
+

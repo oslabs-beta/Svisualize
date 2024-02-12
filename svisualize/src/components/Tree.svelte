@@ -4,6 +4,7 @@
 
   export let componentStructure;
 
+
   onMount(() => {
     let height = 2000;
     let width = 2000;
@@ -16,7 +17,7 @@
       .append('g')
       .attr('transform', 'translate(50,50)');
 
-    const root = d3.hierarchy(componentStructure[0]);
+    const root = d3.hierarchy(structure[0]);
     //const roots = d3.hierarchy(root);
     // console.log(componentStructure[0]);
     // console.log(root);

@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import Tree from "./Tree.svelte";
-
+  
     let componentStructure = [];
 
     onMount(() => {
@@ -18,6 +18,7 @@
   </script>
 
   <main>
+
     <h1>See your component structure below!</h1>
     {#if componentStructure.length > 0}
       <Tree {componentStructure}/>

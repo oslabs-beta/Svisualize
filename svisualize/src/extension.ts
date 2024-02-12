@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
 import { parseFile } from './parseFile';
+import { getComponentStructure } from './componentStructure';
 
 export function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendUri');
@@ -12,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
       sidebarProvider
     )
   );
+
 
   // context.subscriptions.push(
   //   vscode.commands.registerCommand('svisualize.refresh', async () => {
