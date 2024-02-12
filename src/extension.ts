@@ -45,6 +45,21 @@ export function activate(context: vscode.ExtensionContext) {
       });
     })
   );
+
+//   // Listen for changes in the webview's view state (e.g., when it's resized)
+//   sidebarProvider._view?.webview.onDidChangeViewState(event => {
+//   const newPanelViewState = event.webviewPanel.visible;
+//   if (newPanelViewState) {
+//       // The webview is now visible, resize it as needed
+//       const panelWidth = panel.webviewView.visibleColumn * vscode.window.activeTextEditor!.options.fontInfo.typicalHalfwidthCharacterWidth;
+//       const panelHeight = panel.webviewView.visibleRows * vscode.window.activeTextEditor!.options.fontInfo.lineHeight;
+//       resizePanel(panelWidth, panelHeight);
+//   }
+// });
+
+    //function that resizes panel
+ 
+
 }
 
 //declare a function that renders webview content. render an html file
