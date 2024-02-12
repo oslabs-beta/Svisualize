@@ -26,14 +26,12 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 - 🔗 [How to Contribute](#how-to-contribute)
 - 🙆 [Founders](#founders)
 
-
 ## Features
 
 With Svisualize you can:
 
 - Visualize each Svelte component as a node on the component tree
-- Each node will be linked to its parent and children components
-
+- View parent-child hierarchy
 
 ## Getting Started
 
@@ -42,17 +40,14 @@ With Svisualize you can:
 
    (Insert gif here)
 
-
 ## Roadmap
 
-- Adding additional functionality within the visualizer
+- Add additional functionality within the visualizer
 - More UX/UI options within visualizer (e.g. changing color of nodes based on user preference)
 
 ## How to Contribute
 
-The open-source community is awesome because of contributors like you. Your contributions are invaluable!
-
-If you have a suggestion, fork the repo and make a pull request. You can also open an issue to discuss your idea. And, don't forget to give the project a star! Thanks!
+Svisualize is an open source project and we welcome iterations and contributions. If you have a suggestion, please follow the steps below or open an issue to discuss your idea. 
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -60,9 +55,41 @@ If you have a suggestion, fork the repo and make a pull request. You can also op
 4. Push to the Branch (`git push origin feature/AmazingFeature`)fgf
 5. Open a Pull Request
 
+Don't forget to give the project a star! Thank you for your support!
+
 ## Founders
 
-Lumeng Li [Github](https://github.com/lumengli7) | [LinkedIn](www.linkedin.com/in/lumeng-li-90978b2a4)
-<br/>Caleb Belkin [Github](https://github.com/calebbelkin) | [LinkedIn](https://www.linkedin.com/)
-<br/>Kris Fragata [Github](https://github.com/krisfragata) | [LinkedIn](https://www.linkedin.com/)
-<br/>Jason Huang [Github](https://github.com/itsdayson) | [LinkedIn](https://www.linkedin.com/)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/lumengli7.png" width="140px;" alt="a photo of Anatoliy Sokolov"/>
+      <br />
+      <sub><b>Lumeng Li</b></sub>
+      <br />
+      <a href="www.linkedin.com/in/lumeng-li-90978b2a4">Linkedin</a> |
+      <a href="https://github.com/lumengli7">GitHub</a>
+    </td>
+     <td align="center">
+      <img src="https://github.com/itsdayson.png" width="140px;" alt="a photo of Brian Henkel"/>
+      <br />
+      <sub><b>Jason Huang</b></sub>
+      <br />
+      <a href="https://www.linkedin.com">Linkedin</a> |
+      <a href="https://github.com/itsdayson">GitHub</a>
+    </td> <td align="center">
+      <img src="https://github.com/krisfragata.png" width="140px;" alt="a photo of Jordan Querubin"/>
+      <br />
+      <sub><b>Kris Fragata</b></sub>
+      <br />
+      <a href="https://www.linkedin.com">Linkedin</a> |
+      <a href="https://github.com/krisfragata">GitHub</a>
+    </td> <td align="center">
+      <img src="https://github.com/calebbelkin.png" width="140px;" alt="a photo of Nathan Peel"/>
+      <br />
+      <sub><b>Caleb Belkin</b></sub>
+      <br />
+      <a href="https://www.linkedin.com">Linkedin</a> |
+      <a href="https://github.com/calebbelkin">GitHub</a>
+    </td>     
+  </tr>
+</table>
