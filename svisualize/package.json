@@ -34,19 +34,14 @@
     },
     "commands": [
       {
-        "command": "svisualize.render",
-        "category": "Svisualize",
-        "title": "render"
-      },
-      {
         "command": "svisualize.refresh",
         "category": "svisualize",
         "title": "Refresh"
       },
       {
-        "command": "svisualize.search",
+        "command": "svisualize.sendUri",
         "category": "svisualize",
-        "title": "Search"
+        "title": "Send Uri"
       }
     ]
   },

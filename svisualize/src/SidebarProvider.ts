@@ -44,19 +44,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    // const styleResetUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css')
-    // );
-    // const styleVSCodeUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
-    // );
-
     const scriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, 'dist', 'sidebar.js')
     );
-    // const styleMainUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(this._extensionUri, 'dist', 'sidebar.css')
-    // );
 
     // Use a nonce to only allow a specific script to be run.
     const nonce = getNonce();
@@ -71,6 +61,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         -->
         <meta http-equiv="Content-Security-Policy" content="img-src https: data:; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script nonce = "${nonce}">
+          const tsvscode = acquireVsCodeApi();
+        </script>
 			</head>
       <body>
 				<script nonce="${nonce}" src="${scriptUri}"></script>

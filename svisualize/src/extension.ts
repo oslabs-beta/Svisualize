@@ -1,18 +1,10 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-const path = require('path');
 import { SidebarProvider } from './SidebarProvider';
-import { traverseDirectory } from './traverseDirectory';
 import { parseFile } from './parseFile';
 import { getComponentStructure } from './componentStructure';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "svisualize" is now active!');
+  vscode.commands.executeCommand('svisualize.sendUri');
 
   const sidebarProvider = new SidebarProvider(context.extensionUri);
   context.subscriptions.push(
@@ -22,70 +14,35 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.refresh', async () => {
-      await vscode.commands.executeCommand('workbench.action.closeSidebar');
-      await vscode.commands.executeCommand(
-        'workbench.view.extension.svisualize-sidebar-view'
-      );
 
-      setTimeout(() => {
-        vscode.commands.executeCommand(
-          'workbench.action.webview.openDeveloperTools'
-        );
-      }, 500);
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.search', async () => {
-      const folders = vscode.workspace.workspaceFolders;
-      if (folders) {
-        folders.forEach((folder) => {
-          const rootPath = folder.uri.fsPath;
-          getComponentStructure(rootPath);
-        });
-      } else {
-        vscode.window.showErrorMessage('No workspace opened');
-      }
-    })
-  );
-
-  //create a command to render d3 tree in webview
   // context.subscriptions.push(
-  //   vscode.commands.registerCommand('svisualize.render', async () => {
-  //     //show a message on render that asks users to insert file path of tree root
-  //     const rootPath = await vscode.window.showInformationMessage(
-  //       'Enter File Path of Tree Root',
-  //       'Entered'
+  //   vscode.commands.registerCommand('svisualize.refresh', async () => {
+  //     await vscode.commands.executeCommand('workbench.action.closeSidebar');
+  //     await vscode.commands.executeCommand(
+  //       'workbench.view.extension.svisualize-sidebar-view'
   //     );
 
-  //     if (rootPath === 'Entered') {
-  //       const panel = vscode.window.createWebviewPanel(
-  //         'svisualize',
-  //         'Svisualize',
-  //         vscode.ViewColumn.One,
-  //         {
-  //           //enable js scripts in webview
-  //           enableScripts: true,
-  //         }
+  //     setTimeout(() => {
+  //       vscode.commands.executeCommand(
+  //         'workbench.action.webview.openDeveloperTools'
   //       );
-
-  //       //grab extensionId from package.json
-  //       // const extensionId = require('../package.json').name;
-
-  //       //retrieve path of demo file from demo.js
-  //       const scriptPath = vscode.Uri.file(path.join(__dirname, 'App.js'));
-  //       //change script path to webviewuri
-  //       const scriptUri = panel.webview.asWebviewUri(scriptPath);
-  //       const demoJS = `<script src="${scriptUri}"></script>`;
-  //       console.log('demo script', demoJS);
-
-  //       console.log('inside webview');
-  //       panel.webview.html = getWebviewContent(demoJS);
-  //     }
+  //     }, 500);
   //   })
   // );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('svisualize.sendUri', async () => {
+      const folders = vscode.workspace.workspaceFolders;
+      const rootPath = folders[0].uri.fsPath;
+      const result = await parseFile(rootPath);
+      console.log(result);
+      //we are sending a message containing result which is our final componentStructure to Svelte
+      sidebarProvider._view?.webview.postMessage({
+        type: 'structure',
+        value: result,
+      });
+    })
+  );
 }
 
 //declare a function that renders webview content. render an html file
@@ -98,10 +55,7 @@ function getWebviewContent(filePath: string): string {
 			<title>Svisualize</title>
 	</head>
 	<body>
-			<div id="app"></div>
-			<div id="d3-content">
 				${filePath}
-			</div>
 	</body>
 	</html>`;
 }

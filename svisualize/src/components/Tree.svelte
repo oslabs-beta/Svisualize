@@ -1,7 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import * as d3 from 'd3';
-  export let structure;
+
+  export let componentStructure;
+
 
   onMount(() => {
     let height = 2000;
