@@ -35,6 +35,16 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           vscode.window.showErrorMessage(data.value);
           break;
         }
+        case 'render': {
+          if (!data.value) {
+            return;
+          }
+          await vscode.commands.executeCommand(
+            'workbench.action.webview.reloadWebviewAction'
+          );
+          vscode.commands.executeCommand('svisualize.sendUri');
+          break;
+        }
       }
     });
   }
