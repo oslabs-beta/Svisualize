@@ -13,21 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  // context.subscriptions.push(
-  //   vscode.commands.registerCommand('svisualize.refresh', async () => {
-  //     await vscode.commands.executeCommand('workbench.action.closeSidebar');
-  //     await vscode.commands.executeCommand(
-  //       'workbench.view.extension.svisualize-sidebar-view'
-  //     );
-
-  //     setTimeout(() => {
-  //       vscode.commands.executeCommand(
-  //         'workbench.action.webview.openDeveloperTools'
-  //       );
-  //     }, 500);
-  //   })
-  // );
-
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async () => {
       const folders = vscode.workspace.workspaceFolders;
@@ -46,20 +31,33 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
-//   // Listen for changes in the webview's view state (e.g., when it's resized)
-//   sidebarProvider._view?.webview.onDidChangeViewState(event => {
-//   const newPanelViewState = event.webviewPanel.visible;
-//   if (newPanelViewState) {
-//       // The webview is now visible, resize it as needed
-//       const panelWidth = panel.webviewView.visibleColumn * vscode.window.activeTextEditor!.options.fontInfo.typicalHalfwidthCharacterWidth;
-//       const panelHeight = panel.webviewView.visibleRows * vscode.window.activeTextEditor!.options.fontInfo.lineHeight;
-//       resizePanel(panelWidth, panelHeight);
-//   }
-// });
+  // context.subscriptions.push(
+  //   vscode.commands.registerCommand('svisualize.refresh', async () => {
+  //     await vscode.commands.executeCommand('workbench.action.closeSidebar');
+  //     await vscode.commands.executeCommand(
+  //       'workbench.view.extension.svisualize-sidebar-view'
+  //     );
 
-    //function that resizes panel
- 
+  //     setTimeout(() => {
+  //       vscode.commands.executeCommand(
+  //         'workbench.action.webview.openDeveloperTools'
+  //       );
+  //     }, 500);
+  //   })
+  // );
 
+  //   // Listen for changes in the webview's view state (e.g., when it's resized)
+  //   sidebarProvider._view?.webview.onDidChangeViewState(event => {
+  //   const newPanelViewState = event.webviewPanel.visible;
+  //   if (newPanelViewState) {
+  //       // The webview is now visible, resize it as needed
+  //       const panelWidth = panel.webviewView.visibleColumn * vscode.window.activeTextEditor!.options.fontInfo.typicalHalfwidthCharacterWidth;
+  //       const panelHeight = panel.webviewView.visibleRows * vscode.window.activeTextEditor!.options.fontInfo.lineHeight;
+  //       resizePanel(panelWidth, panelHeight);
+  //   }
+  // });
+
+  //function that resizes panel
 }
 
 //declare a function that renders webview content. render an html file

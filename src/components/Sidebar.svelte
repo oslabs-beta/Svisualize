@@ -29,20 +29,44 @@
   </script>
 
   <main>
-    <!-- <div class="background"> -->
+    <div class="header">
       <h1>See your component structure below!</h1>
+
+      <button on:click={(() => {
+        tsvscode.postMessage({ type: 'render', value: 'render' });
+      })}>Render</button>
+    </div>
+
       <TreeWrapper>
         {#if componentStructure.length > 0}
           <Tree {componentStructure}/>
         {/if}
       </TreeWrapper>
     
-    <!-- </div> -->
   </main>
 
   <style>
     h1 {
       color: #e3ae52;
       text-align: center;
+    }
+    
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    button {
+      width: 15em;
+      height: 2em;
+      background-color: #2a2a2a;
+      color: #e3ae52;
+      border-radius: 5px;
+      border: 1px solid #434343;
+      box-shadow: 3px 3px 2px #2b2b2b;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 10px;
     }
   </style>
