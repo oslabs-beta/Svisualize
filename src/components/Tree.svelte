@@ -3,9 +3,20 @@
   import * as d3 from "d3";
 
   export let componentStructure;
+
   export let width;
+  export let height;
   // export let height;
   // export let mounted;
+
+  window.addEventListener('resize', (e)=> {
+    width = document.querySelector('.tree-wrapper').offsetWidth;
+    height = document.querySelector('.tree-wrapper').offsetHeight;
+      
+        // tick();
+        // console.log('width: ',width);
+        // console.log('height: ', height);
+  ;})
 
   // let containerHeight = 0;
   // let containerWidth = 0;
@@ -15,10 +26,16 @@
   //   console.log("container: ", containerWidth);
   // });
 
-  onMount(() => {  
-    let containerWidth = 2500;
-    let containerHeight = 2000;
-    console.log('width', width);
+  onMount(() => {
+      // console.log('width: ',width);
+        // console.log('height: ', height);
+    console.log(width, height);
+    // if( containerWidth === 0 && containerHeight === 0)
+    let containerWidth = width;
+    if (containerWidth === 0) containerWidth = 2000;
+    let containerHeight = height; // let width;
+    if (containerHeight === 0) containerHeight = 1500;
+    // let height;ght;
     let window = d3
       .select("#tree-container")
       .append("svg")
@@ -60,7 +77,7 @@
         return d.data.name;
       })
       .style("fill", "antiquewhite")
-      .attr("dx", "3em") // Move text down
+      .attr("dx", "3em") // Move text to right
       .attr("text-anchor", "middle");
 
     let diagonal = d3
@@ -84,5 +101,4 @@
 <div id="tree-container"></div>
 
 <style>
- 
 </style>
