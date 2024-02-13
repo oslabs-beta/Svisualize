@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
-import { parseFile } from './parseFile';
+import { getComponentStructure } from './getComponentStructure';
 
 export function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendUri');
@@ -11,6 +11,24 @@ export function activate(context: vscode.ExtensionContext) {
       'svisualize-sidebar',
       sidebarProvider
     )
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('svisualize.sendUri', async () => {
+      const folders = vscode.workspace.workspaceFolders;
+      //console.log('folders', folders);
+      // declare a constant rootPath and assign it the file paths in the specified folder
+      const rootPath = folders[0].uri.fsPath;
+      //console.log('root path', rootPath);
+      // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
+      const result = await getComponentStructure(rootPath);
+      //console.log('result', result);
+      // we are sending a message containing result which is our final componentStructure to Svelte
+      sidebarProvider._view?.webview.postMessage({
+        type: 'structure',
+        value: result,
+      });
+    })
   );
 
   // context.subscriptions.push(
@@ -28,34 +46,18 @@ export function activate(context: vscode.ExtensionContext) {
   //   })
   // );
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.sendUri', async () => {
-      const folders = await vscode.workspace.workspaceFolders;
-      const rootPath = folders[0].uri.fsPath ;
-      const result = await parseFile(rootPath);
-      console.log(result);
-      //we are sending a message containing result which is our final componentStructure to Svelte
-      sidebarProvider._view?.webview.postMessage({
-        type: 'structure',
-        value: result,
-      });
-    })
-  );
+  //   // Listen for changes in the webview's view state (e.g., when it's resized)
+  //   sidebarProvider._view?.webview.onDidChangeViewState(event => {
+  //   const newPanelViewState = event.webviewPanel.visible;
+  //   if (newPanelViewState) {
+  //       // The webview is now visible, resize it as needed
+  //       const panelWidth = panel.webviewView.visibleColumn * vscode.window.activeTextEditor!.options.fontInfo.typicalHalfwidthCharacterWidth;
+  //       const panelHeight = panel.webviewView.visibleRows * vscode.window.activeTextEditor!.options.fontInfo.lineHeight;
+  //       resizePanel(panelWidth, panelHeight);
+  //   }
+  // });
 
-//   // Listen for changes in the webview's view state (e.g., when it's resized)
-//   sidebarProvider._view?.webview.onDidChangeViewState(event => {
-//   const newPanelViewState = event.webviewPanel.visible;
-//   if (newPanelViewState) {
-//       // The webview is now visible, resize it as needed
-//       const panelWidth = panel.webviewView.visibleColumn * vscode.window.activeTextEditor!.options.fontInfo.typicalHalfwidthCharacterWidth;
-//       const panelHeight = panel.webviewView.visibleRows * vscode.window.activeTextEditor!.options.fontInfo.lineHeight;
-//       resizePanel(panelWidth, panelHeight);
-//   }
-// });
-
-    //function that resizes panel
- 
-
+  //function that resizes panel
 }
 
 //declare a function that renders webview content. render an html file
