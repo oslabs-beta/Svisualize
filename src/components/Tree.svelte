@@ -35,7 +35,7 @@
 
   function renderTree(){
     let containerWidth = 2000;
-    let containerHeight = 500; // let width;
+    let containerHeight = 2000; // let width;
     if(width > 0) containerWidth = width;
     if(height > 0) containerHeight = height;
 
@@ -52,7 +52,7 @@
     const root = d3.hierarchy(componentStructure[0]);
 
     // console.log('root test', root.data);
-    const tree = d3.tree().size([containerWidth, containerHeight]);
+    const tree = d3.tree().size([containerWidth/4, containerHeight/4]);
 
     const treeDataTransformed = tree(root);
 
