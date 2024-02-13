@@ -7,8 +7,10 @@ export function getComponentStructure(rootPath: string) {
 
 // getting root from getRootContent (App.svelte)
  const root = getRootContent(rootPath);
+//  console.log('root: ', root);
  // getting filePaths array containing the file paths of all svelte files in the application
  const filePaths = getSvelteFiles(rootPath);
+ console.log('files: ', filePaths);
  
   // Define a class constructor to store files in a hierarchical structure
   class TreeNode {
@@ -36,16 +38,26 @@ export function getComponentStructure(rootPath: string) {
             break;
         }
       }
+
+      //check for braces and if they are present, 
+
     }
+
+  
+
     //split file contents' into an array
     const fileContentsArr = fileContents
       .split(/[ ;'"]+/)
       .filter((word) => word.trim() !== '');
 
+    // console.log('file contents: ', fileContentsArr);
     for (let i = 0; i < fileContentsArr.length; i++) {
       //stop loop if file content text are outside of script tags
+      console.log( fileContentsArr[i].includes('import'));
+      if (fileContentsArr[i].includes('import') && !fileContentsArr[i + 1].includes("{"))  {
+        //check if next arr element contains/includes a bracket. if yes, continue out of loop
+        console.log('elements',fileContentsArr[i]);
 
-      if (fileContentsArr[i] === 'import') {
         //create a new instance of treeNode representing the new child
         const newTreeNode = new TreeNode(fileContentsArr[i + 1]);
         //declare a var to grab path [i + 3]
