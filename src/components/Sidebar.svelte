@@ -1,20 +1,20 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import Tree from "./Tree.svelte";
   import TreeWrapper from "./TreeWrapper.svelte";
+  import { createEventDispatcher } from "svelte";
 
     let componentStructure = [];
-
+    let width = 2000;
+    let height = 2000;
+    // const dispatch = createEventDispatcher();
+    // let width;
+    // let height;
+  
 
     onMount(() => {
-      let width = 2000;
-      let height = 2000;
-      window.addEventListener('resize', (e)=> {
-        width = document.querySelector('.tree-wrapper').offsetWidth;
-        height = document.querySelector('.tree-wrapper').offsetHeight;
-        console.log('width: ',width);
-        console.log('height: ', height);
-      })
+      // handleWindowResize();
+      // window.addEventListener('resize', handleWindowResize);
 
       window.addEventListener("message", (event) => {
         const structure = event.data;
@@ -39,7 +39,7 @@
 
       <TreeWrapper>
         {#if componentStructure.length > 0}
-          <Tree {componentStructure}/>
+          <Tree {componentStructure} />
         {/if}
       </TreeWrapper>
     

@@ -1,25 +1,47 @@
 <script>
-  import { onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import * as d3 from "d3";
 
   export let componentStructure;
+
   export let width;
+  export let height;
+  let svg;
   // export let height;
   // export let mounted;
 
-  // let containerHeight = 0;
-  // let containerWidth = 0;
-  // document.addEventListener("DOMContentLoaded", () => {
-  //   containerWidth = document.getElementById("tree-container").offsetWidth;
-  //   containerHeight = document.getElementById("tree-container").offsetHeight;
-  //   console.log("container: ", containerWidth);
-  // });
+  // function handleResize(event) {
+  //   const { width: newWidth, height: newHeight } = event.detail;
+  //   if (newWidth && newHeight) {
+  //     width = newWidth;
+  //     height = newHeight;
+  //     updateTree();
+  //   }
+  // }
 
-  onMount(() => {  
-    let containerWidth = 2500;
-    let containerHeight = 2000;
-    console.log('width', width);
-    let window = d3
+
+  onMount(() => {
+  //  return renderTree();
+      window.addEventListener('resize', handleResize);
+  });
+
+  afterUpdate(()=> renderTree());
+
+  function handleResize(){
+      width = document.querySelector('.tree-wrapper').offsetWidth;
+      height = document.querySelector('.tree-wrapper').offsetHeight;
+      // renderTree();
+  }
+
+  function renderTree(){
+    let containerWidth = 2000;
+    let containerHeight = 500; // let width;
+    if(width > 0) containerWidth = width;
+    if(height > 0) containerHeight = height;
+
+    console.log(width, height)
+
+     svg = d3
       .select("#tree-container")
       .append("svg")
       .attr("height", containerHeight)
@@ -30,14 +52,14 @@
     const root = d3.hierarchy(componentStructure[0]);
 
     // console.log('root test', root.data);
-    const tree = d3.tree().size([containerWidth / 4, containerHeight / 4]);
+    const tree = d3.tree().size([containerWidth, containerHeight]);
 
     const treeDataTransformed = tree(root);
 
     let nodes = treeDataTransformed.descendants();
     let links = treeDataTransformed.links();
 
-    let node = window
+    let node = svg
       .selectAll(".node")
       .data(nodes)
       .enter()
@@ -60,7 +82,7 @@
         return d.data.name;
       })
       .style("fill", "antiquewhite")
-      .attr("dx", "3em") // Move text down
+      .attr("dx", "3em") // Move text to right
       .attr("text-anchor", "middle");
 
     let diagonal = d3
@@ -68,7 +90,7 @@
       .x((d) => d.x)
       .y((d) => d.y);
 
-    window
+    svg
       .selectAll(".link")
       .data(links)
       .enter()
@@ -78,11 +100,10 @@
       .attr("stroke", "#fff")
       .attr("stroke-width", 1)
       .attr("d", diagonal);
-  });
+  }
 </script>
 
 <div id="tree-container"></div>
 
 <style>
- 
 </style>
