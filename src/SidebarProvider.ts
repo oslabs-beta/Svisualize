@@ -1,9 +1,11 @@
 import * as vscode from 'vscode';
 import { getNonce } from './getNonce';
+// import { getRootValue } from './getRootValue';
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
+  private _dataValue: any = null;
 
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
@@ -21,20 +23,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
-        case 'onInfo': {
-          if (!data.value) {
-            return;
-          }
-          vscode.window.showInformationMessage(data.value);
-          break;
-        }
-        case 'onError': {
-          if (!data.value) {
-            return;
-          }
-          vscode.window.showErrorMessage(data.value);
-          break;
-        }
         case 'render': {
           if (!data.value) {
             return;
@@ -49,6 +37,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           if (!data.value) {
             return;
           }
+          console.log(data.value);
+          // getRootValue(data.value);
           break;
         }
       }
@@ -85,5 +75,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;
+  }
+  public get dataValue(): any {
+    return this._dataValue;
   }
 }

@@ -3,23 +3,9 @@
   import Tree from "./Tree.svelte";
   import TreeWrapper from "./TreeWrapper.svelte";
   import ChooseRoot from "./ChooseRoot.svelte";
-  import { createEventDispatcher } from "svelte";
 
     let componentStructure = [];
-    let width = 2000;
-    let height = 2000;
-    //declare a var to hold root
-    let files = [];
-
-    let isRootFound = false;
-    // const dispatch = createEventDispatcher();
-    // let width;
-    // let height;
-  
-
     onMount(() => {
-      // handleWindowResize();
-      // window.addEventListener('resize', handleWindowResize);
 
       window.addEventListener("message", (event) => {
         const structure = event.data;
@@ -37,21 +23,19 @@
   <main>
     <div class="header">
       <h1>Render your component Tree!</h1>
-      {#if !isRootFound}
-        <ChooseRoot/>
-      {/if}
+      <ChooseRoot/>
+
       <button type="submit" on:click={(() => {
         tsvscode.postMessage({ type: 'render', value: 'render' });
       })}>Render</button>
     </div>
 
-      <TreeWrapper>
-        {#if isRootFound}
-          {#if componentStructure.length > 0}
-            <Tree {componentStructure} />
-          {/if}
-        {/if}
-      </TreeWrapper>
+
+    <div id="tree-wrapper">
+    {#if componentStructure.length > 0}
+      <Tree {componentStructure} />
+    {/if}
+    </div>
     
   </main>
 
@@ -78,5 +62,10 @@
       font-size: 16px;
       font-weight: 600;
       margin: 10px;
+    }
+
+    button:hover {
+      background-color: #a3711a;
+      color: #2a2a2a;
     }
   </style>
