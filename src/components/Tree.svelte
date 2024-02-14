@@ -11,7 +11,7 @@
     //sets width and height to match #tree-container - changes on render button
     let treeContainer = document.getElementById("tree-container");
     let containerWidth = treeContainer.clientWidth;
-    let containerHeight = window.innerHeight; 
+    let containerHeight = treeContainer.clientHeight * 7; 
 
     svg = d3
       .select("#tree-container")
