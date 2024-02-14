@@ -1,6 +1,6 @@
-export function getRootValue(data: string) {
-  console.log('woohoo', data);
-  return data;
-}
+// export function getRootValue(data: string) {
+//   console.log('woohoo', data);
+//   const returnData = data;
+// }
 
-export { data };
+// export { returnData };
