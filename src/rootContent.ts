@@ -9,7 +9,10 @@ export function getRootContent(rootPath: string) {
   //parse through directories taken from getSvelteFiles function and find root
   filePaths.forEach((fileURI: string) => {
     // if filePaths contain .svelte and App.svelte
-    if (path.extname(fileURI) === '.svelte' && fileURI.includes('App.svelte')) {
+    if (
+      path.extname(fileURI) === '.svelte' &&
+      (fileURI.includes('App.svelte') || fileURI.includes('+page.svelte'))
+    ) {
       // root contains the contents of App.svelte
       root = fs.readFileSync(fileURI, 'utf-8');
     }

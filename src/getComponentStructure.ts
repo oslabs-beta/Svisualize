@@ -9,7 +9,8 @@ export function getComponentStructure(
 ) {
   // getting root from getRootContent (App.svelte)
   const root = getRootContent(rootPath);
-  //  console.log('root: ', root);
+  console.log('root: ', root);
+
   // getting filePaths array containing the file paths of all svelte files in the application
   const filePaths = getSvelteFiles(rootPath);
   //  console.log('files: ', filePaths);
@@ -25,11 +26,12 @@ export function getComponentStructure(
     }
   }
   // taking the file contents of App.svelte and turning it into a string
-  const rootString = JSON.stringify(root);
+  // const rootString = JSON.stringify(root);
   const componentStructure = new TreeNode('App');
 
-  function parseFunc(fileContents = rootString, currTree = componentStructure) {
+  function parseFunc(fileContents = root, currTree = componentStructure) {
     //only parse through text within script tags
+    console.log('filecon', fileContents);
     for (let i = 0; i < fileContents.length; i++) {
       //if </script
       if (fileContents[i] === '<') {
@@ -46,16 +48,18 @@ export function getComponentStructure(
 
     //split file contents' into an array
     const fileContentsArr = fileContents
-      .split(/[ ;'"]+/)
-      .filter((word) => word.trim() !== '');
+      .split(/(?:\.(?=[./])|[ ;'"])+/)
+      .filter((word: any) => word.trim() !== '');
+    console.log(fileContentsArr);
 
-    // console.log('file contents: ', fileContentsArr);
+    console.log('file contents: ', fileContentsArr);
     for (let i = 0; i < fileContentsArr.length; i++) {
       //stop loop if file content text are outside of script tags
       // console.log( fileContentsArr[i].includes('import'));
       if (
         fileContentsArr[i].includes('import') &&
-        !fileContentsArr[i + 1].includes('{')
+        !fileContentsArr[i + 1].includes('{') &&
+        fileContentsArr[i + 3].includes('.svelte')
       ) {
         //check if next arr element contains/includes a bracket. if yes, continue out of loop
         // console.log('elements',fileContentsArr[i]);
