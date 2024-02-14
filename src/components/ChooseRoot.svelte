@@ -2,7 +2,11 @@
 import { onMount } from "svelte";
 
 let fileNamesArray = [];
-let selectedFile = null;
+let selectedFile = 'App.svelte';
+
+function onSelectFile(file){
+    selectedFile = file;
+}
 
 onMount(() => {
     window.addEventListener("message", (event) => {
@@ -10,6 +14,7 @@ onMount(() => {
         switch(files.type){
             case "files":
                 fileNamesArray = files.value;
+                console.log(files);
                 break;
             }
         })

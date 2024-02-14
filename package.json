@@ -47,6 +47,11 @@
         "command": "svisualize.sendFileNames",
         "category": "svisualize",
         "title": "Send File Names"
+      },
+      {
+        "command": "svisualize.postMessage",
+        "category": "svisualize",
+        "title": "Post Message"
       }
     ]
   },
