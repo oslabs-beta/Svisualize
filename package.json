@@ -75,6 +75,7 @@
     "eslint": "^8.56.0",
     "fs": "^0.0.1-security",
     "mini-css-extract-plugin": "^2.8.0",
+    "mocha": "^10.3.0",
     "path": "^0.12.7",
     "postcss": "^8.4.35",
     "postcss-loader": "^8.1.0",
