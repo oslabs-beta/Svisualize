@@ -42,6 +42,11 @@
         "command": "svisualize.sendUri",
         "category": "svisualize",
         "title": "Send Uri"
+      },
+      {
+        "command": "svisualize.sendFileNames",
+        "category": "svisualize",
+        "title": "Send File Names"
       }
     ]
   },

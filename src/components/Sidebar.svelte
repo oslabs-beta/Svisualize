@@ -2,11 +2,16 @@
   import { onMount, tick } from "svelte";
   import Tree from "./Tree.svelte";
   import TreeWrapper from "./TreeWrapper.svelte";
+  import ChooseRoot from "./ChooseRoot.svelte";
   import { createEventDispatcher } from "svelte";
 
     let componentStructure = [];
     let width = 2000;
     let height = 2000;
+    //declare a var to hold root
+    let files = [];
+
+    let isRootFound = false;
     // const dispatch = createEventDispatcher();
     // let width;
     // let height;
@@ -21,25 +26,30 @@
         switch(structure.type){
           case "structure":
             componentStructure = [structure.value, ...componentStructure];
+            // isRootFound
             break;
         }
       })
     })
-    
+  
   </script>
 
   <main>
     <div class="header">
-      <h1>See your component structure below!</h1>
-
-      <button on:click={(() => {
+      <h1>Render your component Tree!</h1>
+      {#if !isRootFound}
+        <ChooseRoot/>
+      {/if}
+      <button type="submit" on:click={(() => {
         tsvscode.postMessage({ type: 'render', value: 'render' });
       })}>Render</button>
     </div>
 
       <TreeWrapper>
-        {#if componentStructure.length > 0}
-          <Tree {componentStructure} />
+        {#if isRootFound}
+          {#if componentStructure.length > 0}
+            <Tree {componentStructure} />
+          {/if}
         {/if}
       </TreeWrapper>
     

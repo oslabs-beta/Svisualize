@@ -3,15 +3,17 @@ const path = require('path');
 const { getRootContent } = require('./rootContent');
 const { getSvelteFiles } = require('./getSvelteFiles');
 
-export function getComponentStructure(rootPath: string) {
+export function getComponentStructure(
+  rootPath: string,
+  rootName: string = 'App.svelte'
+) {
+  // getting root from getRootContent (App.svelte)
+  const root = getRootContent(rootPath);
+  //  console.log('root: ', root);
+  // getting filePaths array containing the file paths of all svelte files in the application
+  const filePaths = getSvelteFiles(rootPath);
+  //  console.log('files: ', filePaths);
 
-// getting root from getRootContent (App.svelte)
- const root = getRootContent(rootPath);
-//  console.log('root: ', root);
- // getting filePaths array containing the file paths of all svelte files in the application
- const filePaths = getSvelteFiles(rootPath);
- console.log('files: ', filePaths);
- 
   // Define a class constructor to store files in a hierarchical structure
   class TreeNode {
     name: string;
@@ -22,7 +24,7 @@ export function getComponentStructure(rootPath: string) {
       this.children = [];
     }
   }
-// taking the file contents of App.svelte and turning it into a string
+  // taking the file contents of App.svelte and turning it into a string
   const rootString = JSON.stringify(root);
   const componentStructure = new TreeNode('App');
 
@@ -32,18 +34,15 @@ export function getComponentStructure(rootPath: string) {
       //if </script
       if (fileContents[i] === '<') {
         if (fileContents[i + 1] === '/') {
-            // end the slice at the end of the closing carrot
-            fileContents = fileContents.slice(0, i + 9);
-            // exit the for loop that contains all export contents - contains all characters from opening script tags to closing script tags 
-            break;
+          // end the slice at the end of the closing carrot
+          fileContents = fileContents.slice(0, i + 9);
+          // exit the for loop that contains all export contents - contains all characters from opening script tags to closing script tags
+          break;
         }
       }
 
-      //check for braces and if they are present, 
-
+      //check for braces and if they are present,
     }
-
-  
 
     //split file contents' into an array
     const fileContentsArr = fileContents
@@ -53,22 +52,25 @@ export function getComponentStructure(rootPath: string) {
     // console.log('file contents: ', fileContentsArr);
     for (let i = 0; i < fileContentsArr.length; i++) {
       //stop loop if file content text are outside of script tags
-      console.log( fileContentsArr[i].includes('import'));
-      if (fileContentsArr[i].includes('import') && !fileContentsArr[i + 1].includes("{"))  {
+      // console.log( fileContentsArr[i].includes('import'));
+      if (
+        fileContentsArr[i].includes('import') &&
+        !fileContentsArr[i + 1].includes('{')
+      ) {
         //check if next arr element contains/includes a bracket. if yes, continue out of loop
-        console.log('elements',fileContentsArr[i]);
+        // console.log('elements',fileContentsArr[i]);
 
         //create a new instance of treeNode representing the new child
         const newTreeNode = new TreeNode(fileContentsArr[i + 1]);
         //declare a var to grab path [i + 3]
         currTree.children.push(newTreeNode);
-        // iterate through the array of file paths 
+        // iterate through the array of file paths
         for (let j = 0; j < filePaths.length; j++) {
-          // if the file name is found in the filePaths array, run fs.readFileSync on that path 
+          // if the file name is found in the filePaths array, run fs.readFileSync on that path
           if (filePaths[j].includes(fileContentsArr[i + 3])) {
             const childData = fs.readFileSync(filePaths[j], 'utf-8');
             let newSourceString = JSON.stringify(childData);
-            // invoke parseFunc passing in JSON string of childData contents and newTreeNode 
+            // invoke parseFunc passing in JSON string of childData contents and newTreeNode
             parseFunc(newSourceString, newTreeNode);
           }
         }
