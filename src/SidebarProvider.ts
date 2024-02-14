@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { getNonce } from './getNonce';
+import { getRootValue } from './getRootValue';
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -43,6 +44,13 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             'workbench.action.webview.reloadWebviewAction'
           );
           vscode.commands.executeCommand('svisualize.sendUri');
+          break;
+        }
+        case 'selection': {
+          if (!data.value) {
+            return;
+          }
+          getRootValue(data.value);
           break;
         }
       }
