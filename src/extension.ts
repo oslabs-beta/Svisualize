@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
   let rootPath : string | undefined;
   const folders = vscode.workspace.workspaceFolders;
   if(folders && folders.length > 0){
-    const rootPath = folders[0].uri.fsPath;
+     rootPath = folders[0].uri.fsPath;
   }else {
     vscode.window.showInformationMessage('must open a workspace folder');
   }
@@ -32,7 +32,6 @@ export function activate(context: vscode.ExtensionContext) {
     // Handle the case when folders array is undefined or empty
 }
       */
-      const folders = vscode.workspace.workspaceFolders;
       // declare a constant rootPath and assign it the file paths in the specified folder
       // const rootPath = folders ? folders[0].uri.fsPath: vscode.window.showInformationMessage('must open a workspace folder') ;
       // console.log('root path', rootPath);
