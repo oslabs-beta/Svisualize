@@ -22,7 +22,7 @@
 
   <main>
     <div class="header">
-      <h1>Render your component Tree!</h1>
+      <h1>Render your component tree!</h1>
       <ChooseRoot/>
 
       <button type="submit" on:click={(() => {
@@ -41,7 +41,7 @@
 
   <style>
     h1 {
-      color: #e3ae52;
+      color: #dd9e46;
       text-align: center;
     }
     
@@ -65,7 +65,7 @@
     }
 
     button:hover {
-      background-color: #a3711a;
+      background-color: #dd9e46;
       color: #2a2a2a;
     }
   </style>

@@ -18,7 +18,7 @@ onMount(() => {
 </script>
 
 <main>
-    <h1>Choose your root</h1>
+    <h3>Choose your root</h3>
     <select bind:value={selectedFile}>
         {#each fileNamesArray as file}
             <option value={file}>{file}</option>
@@ -38,5 +38,11 @@ onMount(() => {
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
+        color: #f3d9ae;
+    }
+
+    h3 {
+        font-size: 16px;
+        font-weight: 400;
     }
 </style>
