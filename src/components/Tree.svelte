@@ -3,7 +3,6 @@
   import * as d3 from "d3";
 
   export let componentStructure;
-  let svg;
 
   afterUpdate(() => renderTree());
 
@@ -11,15 +10,25 @@
     //sets width and height to match #tree-container - changes on render button
     let treeContainer = document.getElementById("tree-container");
     let containerWidth = treeContainer.clientWidth;
-    let containerHeight = treeContainer.clientHeight * 7; 
+    let containerHeight = treeContainer.clientHeight * 5; 
 
-    svg = d3
+    let svg = d3
       .select("#tree-container")
       .append("svg")
       .attr("width", containerWidth)
       .attr("height", containerHeight) 
       .style("overflow", "visible") //prevents nodes from getting cutoff
       .append("g")
+
+    let div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 1e-6)
+      .style("position", "absolute")
+      .style("padding", "8px")
+      .style("background", "#2a2a2a")
+      .style("border", "solid 2px #434343")
+      .style("border-radius", "5px")
+      .style("pointer-events", "none");
 
     const root = d3.hierarchy(componentStructure[0]);
 
@@ -28,6 +37,7 @@
     const treeDataTransformed = tree(root);
 
     let nodes = treeDataTransformed.descendants();
+    console.log('nodes', nodes)
     let links = treeDataTransformed.links();
 
     let padding = 5; //padding for rectangles
@@ -42,7 +52,7 @@
       .append("path")
       .attr("class", "link")
       .attr("fill", "none")
-      .attr("stroke", "#fff")
+      .attr("stroke", "#f3d9ae")
       .attr("stroke-width", 1)
       .attr("d", diagonal);
 
@@ -55,36 +65,9 @@
       .attr("transform", function (d) {
         return "translate(" + d.x + "," + d.y + ")";
       })
-      .on("mouseover", function () {
-      // Bring the node to the front on mouseover
-        d3.select(this).raise()
-          .transition()
-          .duration(200)
-          .select("text") // Select text element within the node
-          .style("fill", "#ffffff"); // Change text fill color on hover
-
-        d3.select(this)
-          .select("rect") // Select rectangle element within the node
-          .transition()
-          .duration(200)
-          .style("fill", "#333333");
-      })
-      .on("mouseout", function () {
-      // Reset text fill color on mouseout
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .select("text") // Select text element within the node
-          .style("fill", "#antiquewhite"); // Reset text fill color
-
-        d3.select(this)
-          .select("rect") // Select rectangle element within the node
-          .transition()
-          .duration(200)
-          .style("fill", "#a3711a");
-      });     
-
-    // node.append("circle").attr("r", 1).attr("fill", "#e3ae52");
+      .on("mouseover", mouseover)
+      .on("mousemove", function(event, d){mousemove(event,d);})
+      .on("mouseout", mouseout)
 
     //appends text to node
     node
@@ -116,8 +99,8 @@
       .attr("height", function (d) {
         return d.bbox.height + 2 * padding;
       })
-      .style("fill", "#a3711a")
-      .style("stroke", "#e3ae52")
+      .style("fill", "#1d414c")
+      .style("stroke", "#2c8078")
       .style("stroke-width", 2)    
 
     function getTextBox(selection) {
@@ -125,7 +108,53 @@
         d.bbox = this.getBBox();
       });
     }
+
+    function mouseover() {
+      div
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+
+      d3.select(this).raise()
+        .transition()
+        .duration(200)
+        .select("text") // Select text element within the node
+        .style("fill", "#ffffff"); // Change text fill color on hover
+
+      d3.select(this)
+        .select("rect") // Select rectangle element within the node
+        .transition()
+        .duration(200)
+        .style("fill", "#2c8078");
+    }
+
+    function mousemove(event, d) {
+      div
+        .text(d.data.props.length > 0 ? "Props: " + d.data.props.join(", ") : "Props: No props detected")
+        .style("left", (event.pageX) + "px")
+        .style("top", (event.pageY) + "px")
+    }
+
+    function mouseout() {
+      div
+        .transition()
+        .duration(300)
+        .style("opacity", 1e-6);
+
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .select("text") // Select text element within the node
+        .style("fill", "#antiquewhite"); // Reset text fill color
+
+      d3.select(this)
+        .select("rect") // Select rectangle element within the node
+        .transition()
+        .duration(200)
+        .style("fill", "#1d414c");
+    }
   }
+
 </script>
 
 <div id="tree-container"></div>

@@ -9,20 +9,20 @@ export function getComponentStructure(
 ) {
   // getting root from getRootContent (App.svelte)
   const root = getRootContent(rootPath);
-  console.log('root: ', root);
 
   // getting filePaths array containing the file paths of all svelte files in the application
   const filePaths = getSvelteFiles(rootPath);
-  //  console.log('files: ', filePaths);
 
   // Define a class constructor to store files in a hierarchical structure
   class TreeNode {
     name: string;
     children: object[];
+    props?: string[];
 
     constructor(name: string) {
       this.name = name;
       this.children = [];
+      this.props = [];
     }
   }
   // taking the file contents of App.svelte and turning it into a string
@@ -31,7 +31,6 @@ export function getComponentStructure(
 
   function parseFunc(fileContents = root, currTree = componentStructure) {
     //only parse through text within script tags
-    console.log('filecon', fileContents);
     for (let i = 0; i < fileContents.length; i++) {
       //if </script
       if (fileContents[i] === '<') {
@@ -50,30 +49,29 @@ export function getComponentStructure(
     const fileContentsArr = fileContents
       .split(/(?:\.(?=[./])|[ ;'"])+/)
       .filter((word: any) => word.trim() !== '');
-    console.log(fileContentsArr);
 
-    console.log('file contents: ', fileContentsArr);
     for (let i = 0; i < fileContentsArr.length; i++) {
+      if (fileContentsArr[i].includes('export')) {
+        currTree.props?.push(fileContentsArr[i + 2]);
+      }
       //stop loop if file content text are outside of script tags
-      // console.log( fileContentsArr[i].includes('import'));
       if (
         fileContentsArr[i].includes('import') &&
         !fileContentsArr[i + 1].includes('{') &&
         fileContentsArr[i + 3].includes('.svelte')
       ) {
         //check if next arr element contains/includes a bracket. if yes, continue out of loop
-        // console.log('elements',fileContentsArr[i]);
-
         //create a new instance of treeNode representing the new child
         const newTreeNode = new TreeNode(fileContentsArr[i + 1]);
         //declare a var to grab path [i + 3]
         currTree.children.push(newTreeNode);
+
         // iterate through the array of file paths
         for (let j = 0; j < filePaths.length; j++) {
           // if the file name is found in the filePaths array, run fs.readFileSync on that path
           if (filePaths[j].includes(fileContentsArr[i + 3])) {
             const childData = fs.readFileSync(filePaths[j], 'utf-8');
-            let newSourceString = JSON.stringify(childData);
+            let newSourceString = childData;
             // invoke parseFunc passing in JSON string of childData contents and newTreeNode
             parseFunc(newSourceString, newTreeNode);
           }
