@@ -43,7 +43,7 @@ With Svisualize you can:
 1. Install Svisualize from the extension marketplace
 2. Click on the tree icon on the activity bar to start the extension
 (Insert gif here)
-3. Label your root Svelte file as App.svelte or +page.svelte if using SvelteKit
+3. Label your root Svelte file as **App.svelte** or **+page.svelte** if using SvelteKit
 
 ## Roadmap
 
