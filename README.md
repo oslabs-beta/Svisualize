@@ -36,12 +36,14 @@ With Svisualize you can:
 
 - Visualize each Svelte component as a node on the component tree
 - View parent-child hierarchy
+- View props present within each component by hovering it's component node
 
 ## Getting Started
 
 1. Install Svisualize from the extension marketplace
 2. Click on the tree icon on the activity bar to start the extension
 (Insert gif here)
+3. Label your root Svelte file as App.svelte or +page.svelte if using SvelteKit
 
 ## Roadmap
 
