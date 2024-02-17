@@ -2,13 +2,16 @@ import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
 import { getComponentStructure } from './getComponentStructure';
 import { getSvelteFileNames } from './getSvelteFileNames';
+import { getRootName } from './getRootName';
 
 export function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendUri');
   vscode.commands.executeCommand('svisualize.sendFileNames');
 
   let rootPath: string | undefined;
+  let rootName: string | undefined;
   const folders = vscode.workspace.workspaceFolders;
+  console.log(folders);
   if (folders && folders.length > 0) {
     rootPath = folders[0].uri.fsPath;
   } else {
@@ -31,7 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
       // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
       //create an edge case if rootPath returns undefined
       if (rootPath) {
-        const result = await getComponentStructure(rootPath);
+        rootName = await getRootName(rootPath);
+        const result = await getComponentStructure(rootPath, rootName);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
           value: result,
