@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 // declare a function getSvelteFiles that takes in a string that returns an array of strings
-export function getSvelteFiles(dir: string): string[] {
+export function getSvelteFiles(dir: string): string[] | string {
   // declare a const files and assign it the array of file names from the specified folder
+  if (dir === '' || dir === undefined) {return 'no such file or directory';};
   const files = fs.readdirSync(dir);
   // filePath is an array of strings that is currently empty
   let filePathArray: string[] = [];
