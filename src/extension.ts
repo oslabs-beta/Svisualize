@@ -8,8 +8,8 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendUri');
   vscode.commands.executeCommand('svisualize.sendFileNames');
 
-  let rootPath: string | undefined;
-  let rootName: string | undefined;
+  let rootPath: string;
+  let rootName: string;
   const folders = vscode.workspace.workspaceFolders;
   console.log(folders);
   if (folders && folders.length > 0) {
