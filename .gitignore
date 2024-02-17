@@ -4,4 +4,6 @@ node_modules/
 #ignore dist
 dist/
 
+#ignore testing directories
 out/
+.vscode-test

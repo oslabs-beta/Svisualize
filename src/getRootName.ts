@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { getSvelteFileNames } = require('./getSvelteFileNames');
 
-export function getRootName(rootPath: string) : string {
+export function getRootName(rootPath: string): string {
   const fileNames = getSvelteFileNames(rootPath); //this will return an array of all file paths that end in .svelte
   let rootName = '';
 
@@ -11,7 +11,9 @@ export function getRootName(rootPath: string) : string {
     // if filePaths contain .svelte and App.svelte
     if (
       path.extname(name) === '.svelte' &&
-      (name.includes('App.svelte') || name.includes('+page.svelte') || name.includes('test.svelte'))
+      (name.includes('App.svelte') ||
+        name.includes('+page.svelte') ||
+        name.includes('Test.svelte'))
     ) {
       // root contains the contents of App.svelte
       const rootNameArr = name.split('.');
