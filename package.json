@@ -71,6 +71,7 @@
     "@vscode/test-cli": "^0.0.4",
     "@vscode/test-electron": "^2.3.9",
     "autoprefixer": "^10.4.17",
+    "chai": "*",
     "d3": "^7.8.5",
     "eslint": "^8.56.0",
     "fs": "^0.0.1-security",
@@ -88,6 +89,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@types/chai": "^4.3.11",
     "concurrently": "^8.2.2",
     "css-loader": "^6.10.0",
     "style-loader": "^3.3.4"
