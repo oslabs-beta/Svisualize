@@ -3,10 +3,11 @@ const path = require('path');
 const { getRootContent } = require('./rootContent');
 const { getSvelteFiles } = require('./getSvelteFiles');
 
-export function getComponentStructure(rootPath: string, rootName: string) {
-  // getting root from getRootContent (App.svelte)
-  const root = getRootContent(rootPath);
-
+export function getComponentStructure(
+  rootPath: string,
+  rootName: string,
+  root: string
+) {
   // getting filePaths array containing the file paths of all svelte files in the application
   const filePaths = getSvelteFiles(rootPath);
 

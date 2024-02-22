@@ -31,14 +31,20 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             'workbench.action.webview.reloadWebviewAction'
           );
           vscode.commands.executeCommand('svisualize.sendUri');
+          vscode.commands.executeCommand('svisualize.sendFileNames');
           break;
         }
         case 'selection': {
           if (!data.value) {
             return;
           }
-          console.log(data.value);
-          // getRootValue(data.value);
+          console.log('data!!', data.value);
+          await vscode.commands.executeCommand(
+            'workbench.action.webview.reloadWebviewAction'
+          );
+          const rootVal = data.value;
+          vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+          vscode.commands.executeCommand('svisualize.sendFileNames');
           break;
         }
       }
