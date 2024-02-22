@@ -2,18 +2,15 @@ import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
 import { getComponentStructure } from './getComponentStructure';
 import { getSvelteFileNames } from './getSvelteFileNames';
-import { getRootName } from './getRootName';
 import { getRootContent } from './rootContent';
 
 export function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendFileNames');
 
   let rootPath: string;
-  let rootName: string;
-  let root: string;
   const folders = vscode.workspace.workspaceFolders;
   if (folders && folders.length > 0) {
-    rootPath = folders[0].uri.fsPath;
+    let rootPath: string = folders[0].uri.fsPath;
   } else {
     vscode.window.showInformationMessage('must open a workspace folder');
   }
@@ -28,17 +25,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
-      // declare a constant rootPath and assign it the file paths in the specified folder
-      // const rootPath = folders ? folders[0].uri.fsPath: vscode.window.showInformationMessage('must open a workspace folder') ;
-      // console.log('root path', rootPath);
-      // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
-      //create an edge case if rootPath returns undefined
       if (rootVal) {
-        // rootName = await getRootName(rootPath);
-        const root = getRootContent(rootPath, rootVal);
-        console.log('yay root', root);
+        let root: string = getRootContent(rootPath, rootVal)!;
         const result = await getComponentStructure(rootPath, rootVal, root);
-        console.log('result', result);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
           value: result,

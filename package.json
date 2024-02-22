@@ -34,11 +34,6 @@
     },
     "commands": [
       {
-        "command": "svisualize.refresh",
-        "category": "svisualize",
-        "title": "Refresh"
-      },
-      {
         "command": "svisualize.sendUri",
         "category": "svisualize",
         "title": "Send Uri"
