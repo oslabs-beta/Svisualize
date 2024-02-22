@@ -4,8 +4,8 @@ import { getComponentStructure } from './getComponentStructure';
 import { getSvelteFileNames } from './getSvelteFileNames';
 import { getRootContent } from './rootContent';
 
-export function activate(context: vscode.ExtensionContext) {
-  vscode.commands.executeCommand('svisualize.sendFileNames');
+export async function activate(context: vscode.ExtensionContext) {
+   vscode.commands.executeCommand('svisualize.sendFileNames');
 
   let rootPath: string;
   const folders = vscode.workspace.workspaceFolders;
@@ -22,6 +22,8 @@ export function activate(context: vscode.ExtensionContext) {
       sidebarProvider
     )
   );
+
+  
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
@@ -52,6 +54,15 @@ export function activate(context: vscode.ExtensionContext) {
       } else {
         vscode.window.showInformationMessage('must open a workspace folder');
       }
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('svisualize.activate', async () => {
+      vscode.commands.executeCommand(
+        'workbench.action.webview.reloadWebviewAction'
+      );
+      vscode.commands.executeCommand('svisualize.sendFileNames');
     })
   );
 }

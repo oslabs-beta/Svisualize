@@ -13,7 +13,7 @@
             componentStructure = [structure.value, ...componentStructure];
             break;
         }
-      })
+      });
     })
   
   </script>
