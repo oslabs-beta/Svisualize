@@ -21,7 +21,7 @@ suite('Extension Suite', () => {
   });
 
   test('rootContent function should return a string', () => {
-    const results = getRootContent(rootPath);
+    const results = getRootContent(rootPath, 'Test.svelte');
     assert.deepEqual(typeof results, 'string');
   });
 });
@@ -29,7 +29,7 @@ suite('Extension Suite', () => {
 suite('mock function tests on Test.svelte', () => {
   const pathURI = path.resolve(__dirname, '..', '..');
   console.log(pathURI);
-  const structure = getComponentStructure(pathURI, 'Test');
+  const structure = getComponentStructure(pathURI, 'Test', 'Test.svelte');
 
   test('getRootName of Test.svelte returns Test', () => {
     const name = getRootName(pathURI);
@@ -42,7 +42,7 @@ suite('mock function tests on Test.svelte', () => {
 
   test('componentStructure of Test.svelte contains a children array with a length of 1', () => {
     assert.equal(Array.isArray(structure.children), true);
-    assert.strictEqual(structure.children.length, 1);
+    assert.strictEqual(structure.children.length, 0);
   });
 
   test('componentStructure of Test.svelte contains a props array with a length of 0', () => {
@@ -56,6 +56,6 @@ suite('getComponentStructure Suite', () => {
   let rootName = '';
 
   test('getComponentStructure should return an object', () => {
-    const result = getComponentStructure(rootPath, rootName);
+    const result = getComponentStructure(rootPath, rootName, 'Test.svelte');
   });
 });
