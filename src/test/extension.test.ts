@@ -8,17 +8,8 @@ import { getRootName } from '../getRootName';
 import path from 'path';
 import * as assert from 'assert';
 
-suite('Extension Test Suite', () => {
-  vscode.window.showInformationMessage('Start all tests.');
-
-  test('Sample test', () => {
-    assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-    assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-  });
-});
-
 suite('Extension Suite', () => {
-  let rootPath = '';
+  const rootPath = path.resolve(__dirname, '..', '..');
 
   test('getSvelteFiles should return an array or string', () => {
     const result = getSvelteFiles(rootPath);
