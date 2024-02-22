@@ -21,6 +21,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
+    webviewView.onDidChangeVisibility(e=> {
+      vscode.commands.executeCommand(
+        'workbench.action.webview.reloadWebviewAction'
+      );
+      console.log('change window');
+      vscode.commands.executeCommand('svisualize.sendFileNames');
+    });
+
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
         case 'render': {
@@ -38,7 +46,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           if (!data.value) {
             return;
           }
-          console.log('data!!', data.value);
           await vscode.commands.executeCommand(
             'workbench.action.webview.reloadWebviewAction'
           );
