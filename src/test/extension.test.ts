@@ -37,6 +37,7 @@ suite('Extension Suite', () => {
 
 suite('mock function tests on Test.svelte', () => {
   const pathURI = path.resolve(__dirname, '..', '..');
+  console.log(pathURI);
   const structure = getComponentStructure(pathURI, 'Test');
 
   test('getRootName of Test.svelte returns Test', () => {

@@ -1,3 +1,3 @@
 <script>
-    import child10 from '/child10.svelte';
+    import hello from '/world.svelte';
   </script>
