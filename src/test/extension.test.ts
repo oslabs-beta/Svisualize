@@ -67,7 +67,7 @@ suite('getComponentStructure Suite', () => {
     const result = getComponentStructure(rootPath, rootName);
   });
 });
-=======
+
 	let rootPath = '' ;
 
 	test('getSvelteFiles should return an array or string', () => {
