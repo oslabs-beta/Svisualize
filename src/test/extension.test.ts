@@ -67,36 +67,3 @@ suite('getComponentStructure Suite', () => {
     const result = getComponentStructure(rootPath, rootName);
   });
 });
-=======
-	let rootPath = '' ;
-
-	test('getSvelteFiles should return an array or string', () => {
-		const result = getSvelteFiles(rootPath);
-		if(rootPath === ''){
-			assert.equal(typeof result, 'string');
-		}else{
-			assert.equal(Array.isArray(result), true);
-		}
-	});
-
-	test('rootContent function should return a string', () => {
-		const results = getRootContent(rootPath);
-		assert.deepEqual(typeof results, 'string');
-	});
-
-	test('getRootName on test.svelte returns test', () => {
-		const pathURI = path.resolve(__dirname);
-		const name = getRootName(pathURI);
-		assert.equal(name, 'test');
-	});
-});
-
-//test that getComponentStructure returns an object
-suite('getComponentStructure Suite', () => {
-	let rootPath = '';	 
-	let rootName = '';
-
-	test('getComponentStructure should return an object', () => {
-		const result = getComponentStructure(rootPath, rootName);
-	});
-});
