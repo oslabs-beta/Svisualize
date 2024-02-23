@@ -24,8 +24,8 @@
       <ChooseRoot/>
 
       <button type="submit" on:click={(() => {
-        tsvscode.postMessage({ type: 'render', value: 'render' });
-      })}>Render</button>
+        tsvscode.postMessage({ type: 'resize', value: 'resize' });
+      })}>Resize</button>
     </div>
 
 

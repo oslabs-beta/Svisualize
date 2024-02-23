@@ -17,8 +17,7 @@
         {
           "id": "svisualize-sidebar-view",
           "title": "Svisualize",
-          "icon": "media/treeSym.svg",
-          "command": "svisualize.activate"
+          "icon": "media/treeSym.svg"
         }
       ]
     },
