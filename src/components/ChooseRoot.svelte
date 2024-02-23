@@ -32,7 +32,7 @@
         {/each}
     </select>
     
-        <p>Selected File: {selectedFile}</p>
+        <!-- <p>Selected File: {selectedFile}</p> -->
 </main>
 
 <style>
@@ -42,11 +42,11 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
-        color: #f3d9ae;
+        color: #EFD2A9;
     }
 
     h3 {
-        font-size: 16px;
+        font-size: 25px;
         font-weight: 400;
     }
 
@@ -55,7 +55,8 @@
     }
 
     select{
-        color:#f3d9ae;
+        /* color:#f3d9ae; */
+        font-size: 21px;
     }
 
 </style>
