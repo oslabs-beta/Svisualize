@@ -20,8 +20,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
-    webviewView.onDidChangeVisibility((e) => {
-      vscode.commands.executeCommand('svisualize.activate', rootVal);
+
+    webviewView.onDidChangeVisibility(async e=> {
+     await vscode.commands.executeCommand('svisualize.activate', rootVal);
     });
 
     let rootVal = '';
