@@ -58,7 +58,7 @@ export function getComponentStructure(
       .split(/(?:\.(?=[./])|[ ;'"])+/)
       .filter((word: any) => word.trim() !== '');
 
-      console.log('filecontents', fileContentsArr)
+    console.log('filecontents', fileContentsArr);
 
     for (let i = 0; i < fileContentsArr.length; i++) {
       if (fileContentsArr[i].includes('export')) {
@@ -95,8 +95,9 @@ export function getComponentStructure(
       //     parseFunc(fs.readFileSync(filePaths[0], 'utf-8'), singleNode, filePaths[0]);
       //     //parseFunc(singleNode);
       //   }
-      }
+    }
   }
   parseFunc();
+  console.log('componentS', componentStructure);
   return componentStructure;
 }

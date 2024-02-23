@@ -4,21 +4,11 @@
 
   export let componentStructure;
 
-  // const componentStructure = readable([], set => {
-  //   const unsubscribe = getContext('componentStructure', (value) => {
-  //     set(value);
-  //   });
-
-  //   return unsubscribe;
-  // });
-
   let nodeText = '#EFD2A9';
 
-  
   afterUpdate(() => renderTree());
 
   function renderTree() {
-    d3.select("#tree-container svg").remove();
     //sets width and height to match #tree-container - changes on render button
     let treeContainer = document.getElementById('tree-container');
     let containerWidth = treeContainer.clientWidth;
@@ -51,6 +41,7 @@
     const treeDataTransformed = tree(root);
 
     let nodes = treeDataTransformed.descendants();
+    console.log('nodes', nodes);
     let links = treeDataTransformed.links();
 
     let padding = 5; //padding for rectangles
