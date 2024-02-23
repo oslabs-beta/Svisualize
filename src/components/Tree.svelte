@@ -92,9 +92,10 @@
       .text(function (d) {
         return d.data.name;
       })
-      .call(getTextBox)
       .style('fill', nodeText)
-      // .style('font-size', '20px');
+      .style('font-size', '16px')
+      .attr("font-weight",function(d,i) {return 500;})
+      .call(getTextBox);
 
     //inserts a rectangle behind text
     node

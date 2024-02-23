@@ -24,7 +24,10 @@
 </script>
 
 <main>
-    <h3>Choose your root</h3>
+    <div class="header">
+        <h3>Choose your root file to see your </h3>
+        <img width="64" height="64" src="https://img.icons8.com/external-konkapp-outline-color-konkapp/64/external-tree-tree-konkapp-outline-color-konkapp-8.png" alt="external-tree-tree-konkapp-outline-color-konkapp-8"/>
+    </div>
     <select bind:value={selectedFile} on:change={handleSelectChange}>
         <option value="">--Select your root file--</option>
         {#each fileNamesArray as file}
@@ -45,9 +48,17 @@
         color: #EFD2A9;
     }
 
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
     h3 {
-        font-size: 25px;
-        font-weight: 400;
+        font-size: 28px;
+        text-align: center;
+        font-family: "Arial";  
+        font-weight: 600;
     }
 
     option{
@@ -57,6 +68,8 @@
     select{
         /* color:#f3d9ae; */
         font-size: 21px;
+        padding: 5px;
+        border-radius: 5px;
     }
 
 </style>

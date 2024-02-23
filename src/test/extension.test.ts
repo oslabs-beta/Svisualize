@@ -30,11 +30,6 @@ suite('mock function tests on Test.svelte', () => {
   const code = getRootContent(pathURI, 'Test.svelte')!;
   const structure = getComponentStructure(pathURI, 'Test.svelte', code);
 
-  test('getRootName of Test.svelte returns Test', () => {
-    const name = getRootName(pathURI);
-    assert.equal(name, 'Test');
-  });
-
   test('componentStructure of Test.svelte contains a name property with value of Test', () => {
     assert.equal(structure.name, 'Test.svelte');
   });

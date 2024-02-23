@@ -4,7 +4,9 @@ const path = require('path');
 // declare a function getSvelteFiles that takes in a string that returns an array of strings
 export function getSvelteFiles(dir: string): string[] | string {
   // declare a const files and assign it the array of file names from the specified folder
-  if (dir === '' || dir === undefined) {return 'no such file or directory';};
+  if (dir === '' || dir === undefined) {
+    return 'no such file or directory';
+  }
   const files = fs.readdirSync(dir);
   // filePath is an array of strings that is currently empty
   let filePathArray: string[] = [];
@@ -17,7 +19,7 @@ export function getSvelteFiles(dir: string): string[] | string {
 
     // we check if the stat is a directory if true enter the directory
     if (stat.isDirectory()) {
-      if (file !== 'node_modules') {
+      if (file !== 'node_modules' && file !== '.svelte-kit') {
         filePathArray = filePathArray.concat(getSvelteFiles(filePath));
       }
       // else you have reached a directory that contains no more folders to traverse, if any files in the directory contain .svelte
