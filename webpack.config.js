@@ -62,7 +62,12 @@ const extensionConfig = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'style-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'style-loader',
+          'postcss-loader',
+        ],
       },
     ],
   },

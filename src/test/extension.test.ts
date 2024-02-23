@@ -1,5 +1,3 @@
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
 import { getComponentStructure } from '../getComponentStructure';
 import { getSvelteFiles } from '../getSvelteFiles';
@@ -22,14 +20,15 @@ suite('Extension Suite', () => {
   });
 
   test('rootContent function should return a string', () => {
-    const results = getRootContent(rootPath);
+    const results = getRootContent(rootPath, 'Test.svelte');
     assert.deepEqual(typeof results, 'string');
   });
 });
 
 suite('mock function tests on Test.svelte', () => {
   const pathURI = path.resolve(__dirname, '..', '..');
-  const structure = getComponentStructure(pathURI, 'Test');
+  const code = getRootContent(pathURI, 'Test.svelte')!;
+  const structure = getComponentStructure(pathURI, 'Test.svelte', code);
 
   test('getRootName of Test.svelte returns Test', () => {
     const name = getRootName(pathURI);
@@ -37,7 +36,7 @@ suite('mock function tests on Test.svelte', () => {
   });
 
   test('componentStructure of Test.svelte contains a name property with value of Test', () => {
-    assert.equal(structure.name, 'Test');
+    assert.equal(structure.name, 'Test.svelte');
   });
 
   test('componentStructure of Test.svelte contains a child array with a length of 1', () => {
@@ -53,21 +52,19 @@ suite('mock function tests on Test.svelte', () => {
 //test that getComponentStructure returns an object
 suite('getComponentStructure Suite', () => {
 	let rootPath = path.resolve(__dirname, '..', '..');
-	let name = getRootName(rootPath);
-  const structure = getComponentStructure(rootPath, 'Test');
+  const code = getRootContent(rootPath, 'Test.svelte')!;
+  const result = getComponentStructure(rootPath, 'Test.svelte', code);
   
 	test('getComponentStructure should return an object', () => {
-	  const result = getComponentStructure(rootPath, name);
 	  assert.equal(typeof result, 'object');
 	  assert.ok(result.hasOwnProperty('name'));
 	  assert.ok(result.hasOwnProperty('children'));
 	  assert.ok(result.hasOwnProperty('props'));
 	});
 
-  // test('parseFunc should return the name of the children', () => {
-  //   assert.equal(structure.children[0], 'Hello');
-  // });
-
+  test('parseFunc should return the name of the children', () => {
+    assert.equal(result.children[0].name, 'Hello');
+  });
   });
 
 suite('getSvelteFileNames Suite', () => {

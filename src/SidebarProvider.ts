@@ -15,30 +15,58 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.options = {
       // Allow scripts in the webview
       enableScripts: true,
-
       localResourceRoots: [this._extensionUri],
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
+    webviewView.onDidChangeVisibility( async(e) => {
+      await vscode.commands.executeCommand('svisualize.activate', rootVal);
+    });
+
+    let rootVal = '';
+
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
-        case 'render': {
+        case 'resize': {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand(
-            'workbench.action.webview.reloadWebviewAction'
-          );
-          vscode.commands.executeCommand('svisualize.sendUri');
+          // await vscode.commands.executeCommand(
+          //   'workbench.action.webview.reloadWebviewAction'
+          // );
+          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
           break;
         }
         case 'selection': {
           if (!data.value) {
             return;
           }
-          console.log(data.value);
-          // getRootValue(data.value);
+
+          rootVal = data.value;
+          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+          break;
+        }
+        case 'uri': {
+          if (!data.value) {
+            return;
+          }
+          const vscodeUri = vscode.Uri.file(data.value);
+          vscode.workspace.openTextDocument(vscodeUri).then((document) => {
+            vscode.window.showTextDocument(document);
+          });
+          break;
+        }
+        case 'uri': {
+          if (!data.value) {
+            return;
+          }
+          const vscodeUri = vscode.Uri.file(data.value);
+          vscode.workspace.openTextDocument(vscodeUri).then((document) => {
+            vscode.window.showTextDocument(document);
+          });
           break;
         }
       }

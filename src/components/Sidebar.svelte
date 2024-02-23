@@ -1,7 +1,6 @@
 <script>
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import Tree from "./Tree.svelte";
-  import TreeWrapper from "./TreeWrapper.svelte";
   import ChooseRoot from "./ChooseRoot.svelte";
 
     let componentStructure = [];
@@ -12,9 +11,11 @@
         switch(structure.type){
           case "structure":
             componentStructure = [structure.value, ...componentStructure];
-            // isRootFound
             break;
         }
+      });
+      window.addEventListener('resize', (event) => {
+        tsvscode.postMessage({ type: 'resize', value: 'resize' });
       })
     })
   
@@ -22,14 +23,9 @@
 
   <main>
     <div class="header">
-      <h1>Render your component tree!</h1>
+      <!-- <h1>Render your component tree!</h1> -->
       <ChooseRoot/>
-
-      <button type="submit" on:click={(() => {
-        tsvscode.postMessage({ type: 'render', value: 'render' });
-      })}>Render</button>
     </div>
-
 
     <div id="tree-wrapper">
     {#if componentStructure.length > 0}
@@ -41,24 +37,26 @@
 
   <style>
     h1 {
-      color: #dd9e46;
+      color: #EFD2A9;
       text-align: center;
+      font-family: "Arial";      
     }
     
     .header {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 5px;
     }
 
     button {
-      width: 15em;
+      width: 10em;
       height: 2em;
       background-color: #2a2a2a;
       color: #e3ae52;
       border-radius: 5px;
-      border: 1px solid #434343;
-      box-shadow: 3px 3px 2px #2b2b2b;
+      border: 1px solid #323232;
+      box-shadow: 2px 2px 3px #323232;
       font-size: 16px;
       font-weight: 600;
       margin: 10px;
