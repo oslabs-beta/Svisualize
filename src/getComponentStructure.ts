@@ -77,6 +77,5 @@ export function getComponentStructure(rootPath: string, rootName: string) {
     }
   }
   parseFunc();
-  console.log('expecting', componentStructure);
   return componentStructure;
 }

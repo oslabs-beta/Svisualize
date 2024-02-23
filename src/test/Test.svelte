@@ -1,3 +1,4 @@
 <script>
-    import hello from '/world.svelte';
+    import Hello from '/world.svelte';
   </script>
+

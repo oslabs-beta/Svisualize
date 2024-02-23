@@ -19,6 +19,5 @@ export function getRootContent(rootPath: string) {
       root = fs.readFileSync(fileURI, 'utf-8');
     }
   });
-  console.log(typeof root);
   return root;
 }
