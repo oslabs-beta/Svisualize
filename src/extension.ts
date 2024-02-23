@@ -32,7 +32,8 @@ export async function activate(context: vscode.ExtensionContext) {
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
         );
-        const root: string = getRootContent(rootPath, rootVal)!;
+        const root: string = await getRootContent(rootPath, rootVal)!;
+
         const result = await getComponentStructure(rootPath, rootVal, root);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
@@ -67,7 +68,7 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.activate', async (rootVal) => {
       await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-      vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+      await vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
     })
   );
 }

@@ -3,6 +3,7 @@ import { getComponentStructure } from '../getComponentStructure';
 import { getSvelteFiles } from '../getSvelteFiles';
 import { getRootContent } from '../rootContent';
 import { getRootName } from '../getRootName';
+import { getSvelteFileNames } from '../getSvelteFileNames';
 import path from 'path';
 import * as assert from 'assert';
 
@@ -26,20 +27,16 @@ suite('Extension Suite', () => {
 
 suite('mock function tests on Test.svelte', () => {
   const pathURI = path.resolve(__dirname, '..', '..');
-  const structure = getComponentStructure(pathURI, 'Test', 'Test.svelte');
-
-  test('getRootName of Test.svelte returns Test', () => {
-    const name = getRootName(pathURI);
-    assert.equal(name, 'Test');
-  });
+  const code = getRootContent(pathURI, 'Test.svelte')!;
+  const structure = getComponentStructure(pathURI, 'Test.svelte', code);
 
   test('componentStructure of Test.svelte contains a name property with value of Test', () => {
-    assert.equal(structure.name, 'Test');
+    assert.equal(structure.name, 'Test.svelte');
   });
 
-  test('componentStructure of Test.svelte contains a children array with a length of 1', () => {
+  test('componentStructure of Test.svelte contains a child array with a length of 1', () => {
     assert.equal(Array.isArray(structure.children), true);
-    assert.strictEqual(structure.children.length, 0);
+    assert.strictEqual(structure.children.length, 1);
   });
 
   test('componentStructure of Test.svelte contains a props array with a length of 0', () => {
@@ -49,10 +46,32 @@ suite('mock function tests on Test.svelte', () => {
 
 //test that getComponentStructure returns an object
 suite('getComponentStructure Suite', () => {
-  let rootPath = '';
-  let rootName = '';
+	let rootPath = path.resolve(__dirname, '..', '..');
+  const code = getRootContent(rootPath, 'Test.svelte')!;
+  const result = getComponentStructure(rootPath, 'Test.svelte', code);
+  
+	test('getComponentStructure should return an object', () => {
+	  assert.equal(typeof result, 'object');
+	  assert.ok(result.hasOwnProperty('name'));
+	  assert.ok(result.hasOwnProperty('children'));
+	  assert.ok(result.hasOwnProperty('props'));
+	});
 
-  test('getComponentStructure should return an object', () => {
-    const result = getComponentStructure(rootPath, rootName, 'Test.svelte');
+  test('parseFunc should return the name of the children', () => {
+    assert.equal(result.children[0].name, 'Hello');
+  });
+  });
+
+suite('getSvelteFileNames Suite', () => {
+  const rootPath = path.resolve(__dirname, '..', '..');
+  let result = getSvelteFileNames(rootPath)
+  let name = getSvelteFileNames(rootPath);
+
+	test('getSvelteFileNames should return an array of strings', () => {
+    assert.equal(Array.isArray(result), true);
+  });
+
+  test('getSvelteFileNames should return `Test.svelte`', () => {
+    assert.ok(name.includes('Test.svelte'));
   });
 });
