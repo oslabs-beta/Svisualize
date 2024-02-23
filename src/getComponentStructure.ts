@@ -58,6 +58,8 @@ export function getComponentStructure(
       .split(/(?:\.(?=[./])|[ ;'"])+/)
       .filter((word: any) => word.trim() !== '');
 
+      console.log('filecontents', fileContentsArr)
+
     for (let i = 0; i < fileContentsArr.length; i++) {
       if (fileContentsArr[i].includes('export')) {
         currTree.props?.push(fileContentsArr[i + 2]);
@@ -66,6 +68,7 @@ export function getComponentStructure(
       if (
         fileContentsArr[i].includes('import') &&
         !fileContentsArr[i + 1].includes('{') &&
+        fileContentsArr[i + 2].includes('from') &&
         fileContentsArr[i + 3].includes('.svelte')
       ) {
         //check if next arr element contains/includes a bracket. if yes, continue out of loop
@@ -86,9 +89,14 @@ export function getComponentStructure(
           }
         }
       }
-    }
+      // else if (fileContentsArr[i].includes('import') && fileContentsArr[i + 1] !== ('from'))
+      //    {
+      //     const singleNode = new TreeNode('+layout.svelte')
+      //     parseFunc(fs.readFileSync(filePaths[0], 'utf-8'), singleNode, filePaths[0]);
+      //     //parseFunc(singleNode);
+      //   }
+      }
   }
   parseFunc();
-  console.log('hooray?', componentStructure);
   return componentStructure;
 }

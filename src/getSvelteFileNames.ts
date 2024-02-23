@@ -6,7 +6,7 @@ export function getSvelteFileNames(dir: string): string[] {
   let fileNames: string[] = [];
 
   files.forEach((file: string) => {
-    // dir gives the file path for the folder, file contains the name of teh file, joining them together gives complete file path for each file
+    // dir gives the file path for the folder, file contains the name of the file, joining them together gives complete file path for each file
     const filePath = path.join(dir, file);
     // declare a constant stat and assign it the evaluated result of fs.statSync filePath
     const stat = fs.statSync(filePath);
@@ -23,5 +23,6 @@ export function getSvelteFileNames(dir: string): string[] {
     }
   });
   // return all .svelte file paths from application
+  // console.log('names', fileNames);
   return fileNames;
 }
