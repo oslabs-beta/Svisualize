@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { getRootContent } = require('./rootContent');
 const { getSvelteFiles } = require('./getSvelteFiles');
 
 export function getComponentStructure(
@@ -15,7 +14,7 @@ export function getComponentStructure(
   class TreeNode {
     name: string;
     uri?: string;
-    children: object[];
+    children: TreeNode[];
     props?: string[];
 
     constructor(name: string, uri?: string) {
@@ -28,6 +27,11 @@ export function getComponentStructure(
   // taking the file contents of App.svelte and turning it into a string
   // const rootString = JSON.stringify(root);
   const componentStructure = new TreeNode(rootName);
+  for (let i = 0; i < filePaths.length; i++) {
+    if (filePaths[i].includes(rootName)) {
+      componentStructure.uri = filePaths[i];
+    }
+  }
 
   function parseFunc(
     fileContents = root,
@@ -85,6 +89,6 @@ export function getComponentStructure(
     }
   }
   parseFunc();
-  console.log(componentStructure);
+  console.log('hooray?', componentStructure);
   return componentStructure;
 }

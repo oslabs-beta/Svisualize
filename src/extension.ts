@@ -31,7 +31,7 @@ export async function activate(context: vscode.ExtensionContext) {
       // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
       //create an edge case if rootPath returns undefined
       if (rootVal) {
-        const root: string = getRootContent(rootPath, rootVal)!;
+        const root: string = await getRootContent(rootPath, rootVal)!;
         const result = await getComponentStructure(rootPath, rootVal, root);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
@@ -65,11 +65,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.activate', async (rootVal) => {
-      // vscode.commands.executeCommand(
-      //   'workbench.action.webview.reloadWebviewAction'
-      // );
       await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-      vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+      await vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
     })
   );
 }

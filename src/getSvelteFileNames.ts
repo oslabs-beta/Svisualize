@@ -13,7 +13,7 @@ export function getSvelteFileNames(dir: string): string[] {
 
     // we check if the stat is a directory if true enter the directory
     if (stat.isDirectory()) {
-      if (file !== 'node_modules') {
+      if (file !== 'node_modules' && file !== '.svelte-kit') {
         fileNames = fileNames.concat(getSvelteFileNames(filePath));
       }
       // else you have reached a directory that contains no more folders to traverse, if any files in the directory contain .svelte

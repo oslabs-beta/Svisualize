@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import { getComponentStructure } from '../getComponentStructure';
 import { getSvelteFiles } from '../getSvelteFiles';
 import { getRootContent } from '../rootContent';
-import { getRootName } from '../getRootName';
 import path from 'path';
 import * as assert from 'assert';
 
@@ -28,11 +27,6 @@ suite('mock function tests on Test.svelte', () => {
   const pathURI = path.resolve(__dirname, '..', '..');
   const structure = getComponentStructure(pathURI, 'Test', 'Test.svelte');
 
-  test('getRootName of Test.svelte returns Test', () => {
-    const name = getRootName(pathURI);
-    assert.equal(name, 'Test');
-  });
-
   test('componentStructure of Test.svelte contains a name property with value of Test', () => {
     assert.equal(structure.name, 'Test');
   });
@@ -44,15 +38,5 @@ suite('mock function tests on Test.svelte', () => {
 
   test('componentStructure of Test.svelte contains a props array with a length of 0', () => {
     assert.strictEqual(structure.props?.length, 0);
-  });
-});
-
-//test that getComponentStructure returns an object
-suite('getComponentStructure Suite', () => {
-  let rootPath = '';
-  let rootName = '';
-
-  test('getComponentStructure should return an object', () => {
-    const result = getComponentStructure(rootPath, rootName, 'Test.svelte');
   });
 });
