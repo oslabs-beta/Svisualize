@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
 import { getComponentStructure } from './getComponentStructure';
 import { getSvelteFileNames } from './getSvelteFileNames';
-import { getRootName } from './getRootName';
 import { getRootContent } from './rootContent';
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -29,7 +28,6 @@ export async function activate(context: vscode.ExtensionContext) {
       // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
       //create an edge case if rootPath returns undefined
       if (rootVal) {
-        // rootName = await getRootName(rootPath);
         const root: string = getRootContent(rootPath, rootVal)!;
         const result = await getComponentStructure(rootPath, rootVal, root);
         sidebarProvider._view?.webview.postMessage({
@@ -56,15 +54,6 @@ export async function activate(context: vscode.ExtensionContext) {
       } else {
         vscode.window.showInformationMessage('must open a workspace folder');
       }
-    })
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.activate', async () => {
-      vscode.commands.executeCommand(
-        'workbench.action.webview.reloadWebviewAction'
-      );
-      vscode.commands.executeCommand('svisualize.sendFileNames');
     })
   );
 }

@@ -4,8 +4,7 @@ const { getSvelteFiles } = require('./getSvelteFiles');
 
 export function getRootContent(rootPath: string, rootVal: string) {
   const filePaths = getSvelteFiles(rootPath); //this will return an array of all file paths that end in .svelte
-  let root; //raw code from App.svelte
-  console.log('filepaths', filePaths);
+  let root; //raw code from root file
 
   //parse through directories taken from getSvelteFiles function and find root
   filePaths.forEach((fileURI: string) => {

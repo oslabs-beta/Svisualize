@@ -17,8 +17,7 @@
         {
           "id": "svisualize-sidebar-view",
           "title": "Svisualize",
-          "icon": "media/treeSym.svg",
-          "command": "svisualize.activate"
+          "icon": "media/treeSym.svg"
         }
       ]
     },
@@ -69,6 +68,7 @@
     "@vscode/test-electron": "^2.3.9",
     "autoprefixer": "^10.4.17",
     "chai": "*",
+    "child_process": "^1.0.2",
     "d3": "^7.8.5",
     "eslint": "^8.56.0",
     "fs": "^0.0.1-security",

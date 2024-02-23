@@ -15,17 +15,15 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.options = {
       // Allow scripts in the webview
       enableScripts: true,
-
       localResourceRoots: [this._extensionUri],
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
-    webviewView.onDidChangeVisibility(e=> {
+    webviewView.onDidChangeVisibility((e) => {
       vscode.commands.executeCommand(
         'workbench.action.webview.reloadWebviewAction'
       );
-      console.log('change window');
       vscode.commands.executeCommand('svisualize.sendFileNames');
     });
 
@@ -52,6 +50,16 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           const rootVal = data.value;
           vscode.commands.executeCommand('svisualize.sendUri', rootVal);
           vscode.commands.executeCommand('svisualize.sendFileNames');
+          break;
+        }
+        case 'uri': {
+          if (!data.value) {
+            return;
+          }
+          const vscodeUri = vscode.Uri.file(data.value);
+          vscode.workspace.openTextDocument(vscodeUri).then((document) => {
+            vscode.window.showTextDocument(document);
+          });
           break;
         }
       }
