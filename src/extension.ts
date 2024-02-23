@@ -5,7 +5,7 @@ import { getSvelteFileNames } from './getSvelteFileNames';
 import { getRootContent } from './rootContent';
 
 export async function activate(context: vscode.ExtensionContext) {
-  await vscode.commands.executeCommand('svisualize.sendFileNames');
+  vscode.commands.executeCommand('svisualize.sendFileNames');
 
   let rootPath: string;
   const folders = vscode.workspace.workspaceFolders;
