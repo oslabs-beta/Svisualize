@@ -14,11 +14,13 @@ export function getComponentStructure(
   // Define a class constructor to store files in a hierarchical structure
   class TreeNode {
     name: string;
+    uri?: string;
     children: object[];
     props?: string[];
 
-    constructor(name: string) {
+    constructor(name: string, uri?: string) {
       this.name = name;
+      this.uri = uri;
       this.children = [];
       this.props = [];
     }
@@ -27,7 +29,11 @@ export function getComponentStructure(
   // const rootString = JSON.stringify(root);
   const componentStructure = new TreeNode(rootName);
 
-  function parseFunc(fileContents = root, currTree = componentStructure) {
+  function parseFunc(
+    fileContents = root,
+    currTree = componentStructure,
+    uri?: string
+  ) {
     //only parse through text within script tags
     for (let i = 0; i < fileContents.length; i++) {
       //if </script
@@ -68,16 +74,17 @@ export function getComponentStructure(
         for (let j = 0; j < filePaths.length; j++) {
           // if the file name is found in the filePaths array, run fs.readFileSync on that path
           if (filePaths[j].includes(fileContentsArr[i + 3])) {
+            newTreeNode.uri = filePaths[j];
             const childData = fs.readFileSync(filePaths[j], 'utf-8');
             let newSourceString = childData;
             // invoke parseFunc passing in JSON string of childData contents and newTreeNode
-            parseFunc(newSourceString, newTreeNode);
+            parseFunc(newSourceString, newTreeNode, filePaths[j]);
           }
         }
       }
     }
   }
   parseFunc();
-  console.log('expecting', componentStructure);
+  console.log(componentStructure);
   return componentStructure;
 }

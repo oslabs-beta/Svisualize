@@ -1,5 +1,3 @@
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
 import { getComponentStructure } from '../getComponentStructure';
 import { getSvelteFiles } from '../getSvelteFiles';
@@ -28,7 +26,6 @@ suite('Extension Suite', () => {
 
 suite('mock function tests on Test.svelte', () => {
   const pathURI = path.resolve(__dirname, '..', '..');
-  console.log(pathURI);
   const structure = getComponentStructure(pathURI, 'Test', 'Test.svelte');
 
   test('getRootName of Test.svelte returns Test', () => {

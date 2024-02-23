@@ -72,11 +72,13 @@
       .attr('transform', function (d) {
         return 'translate(' + d.x + ',' + d.y + ')';
       })
-      .on('mouseover', mouseover)
-      .on('mousemove', function (event, d) {
-        mousemove(event, d);
+      .on("mouseover", mouseover)
+      .on("mousemove", function(event, d){mousemove(event,d);})
+      .on("mouseout", mouseout)
+      .on("click", function(d){
+        const uri = d3.select(this).datum().data.uri
+        tsvscode.postMessage({ type: 'uri', value: uri });
       })
-      .on('mouseout', mouseout);
 
     //appends text to node
     node
