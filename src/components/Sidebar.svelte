@@ -1,24 +1,30 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
   import Tree from "./Tree.svelte";
   import ChooseRoot from "./ChooseRoot.svelte";
 
     let componentStructure = [];
     onMount(() => {
 
-      window.addEventListener("message", (event) => {
+      window.addEventListener("message",  (event) => {
         const structure = event.data;
         switch(structure.type){
           case "structure":
-            componentStructure = [structure.value, ...componentStructure];
+            componentStructure = [structure.value];
+            console.log(componentStructure);
             break;
         }
       });
       window.addEventListener('resize', (event) => {
         tsvscode.postMessage({ type: 'resize', value: 'resize' });
+        //ensures there is only one tree rendered
+        if (componentStructure.length >= 1) {
+          componentStructure = componentStructure.slice(0, 1);
+        }
       })
     })
   
+    setContext('componentStructure', componentStructure);
   </script>
 
   <main>
@@ -36,12 +42,7 @@
   </main>
 
   <style>
-    h1 {
-      color: #EFD2A9;
-      text-align: center;
-      font-family: "Arial";      
-    }
-    
+  
     .header {
       display: flex;
       flex-direction: column;
@@ -49,21 +50,5 @@
       margin-top: 5px;
     }
 
-    button {
-      width: 10em;
-      height: 2em;
-      background-color: #2a2a2a;
-      color: #e3ae52;
-      border-radius: 5px;
-      border: 1px solid #323232;
-      box-shadow: 2px 2px 3px #323232;
-      font-size: 16px;
-      font-weight: 600;
-      margin: 10px;
-    }
-
-    button:hover {
-      background-color: #dd9e46;
-      color: #2a2a2a;
-    }
+   
   </style>

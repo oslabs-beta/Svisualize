@@ -85,6 +85,5 @@ export function getComponentStructure(
     }
   }
   parseFunc();
-  console.log(componentStructure);
   return componentStructure;
 }
