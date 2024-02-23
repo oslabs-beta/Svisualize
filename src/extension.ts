@@ -66,9 +66,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.activate', async (rootVal) => {
-      // vscode.commands.executeCommand(
-      //   'workbench.action.webview.reloadWebviewAction'
-      // );
       await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
       vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
     })
