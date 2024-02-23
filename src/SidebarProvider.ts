@@ -22,36 +22,32 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
     webviewView.onDidChangeVisibility(e=> {
-      vscode.commands.executeCommand(
-        'workbench.action.webview.reloadWebviewAction'
-      );
-      console.log('change window');
-      vscode.commands.executeCommand('svisualize.sendFileNames');
+     vscode.commands.executeCommand('svisualize.activate', rootVal);
     });
+
+    let rootVal = '';
 
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
-        case 'render': {
+        case 'resize': {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand(
-            'workbench.action.webview.reloadWebviewAction'
-          );
-          vscode.commands.executeCommand('svisualize.sendUri');
-          vscode.commands.executeCommand('svisualize.sendFileNames');
+          // await vscode.commands.executeCommand(
+          //   'workbench.action.webview.reloadWebviewAction'
+          // );
+          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
           break;
         }
         case 'selection': {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand(
-            'workbench.action.webview.reloadWebviewAction'
-          );
-          const rootVal = data.value;
-          vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-          vscode.commands.executeCommand('svisualize.sendFileNames');
+         
+          rootVal = data.value;
+          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
           break;
         }
       }
