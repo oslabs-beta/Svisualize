@@ -25,6 +25,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
+      await vscode.commands.executeCommand(
+        'workbench.action.webview.reloadWebviewAction'
+      );
       // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
       //create an edge case if rootPath returns undefined
       if (rootVal) {
@@ -43,17 +46,30 @@ export async function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.sendFileNames', async () => {
-      if (rootPath) {
-        const fileNames = await getSvelteFileNames(rootPath);
-        //the postMessage below sends a message with an array of all file names found in App that end in svelte
-        sidebarProvider._view?.webview.postMessage({
-          type: 'files',
-          value: fileNames,
-        });
-      } else {
-        vscode.window.showInformationMessage('must open a workspace folder');
+    vscode.commands.registerCommand(
+      'svisualize.sendFileNames',
+      async (chosenRoot) => {
+        if (rootPath) {
+          const fileNames = await getSvelteFileNames(rootPath);
+          //the postMessage below sends a message with an array of all file names found in App that end in svelte
+          sidebarProvider._view?.webview.postMessage({
+            type: 'files',
+            value: [fileNames, chosenRoot],
+          });
+        } else {
+          vscode.window.showInformationMessage('must open a workspace folder');
+        }
       }
+    )
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('svisualize.activate', async (rootVal) => {
+      // vscode.commands.executeCommand(
+      //   'workbench.action.webview.reloadWebviewAction'
+      // );
+      await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+      vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
     })
   );
 }
