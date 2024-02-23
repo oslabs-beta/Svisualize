@@ -25,7 +25,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
-      
       // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
       //create an edge case if rootPath returns undefined
       if (rootVal) {
