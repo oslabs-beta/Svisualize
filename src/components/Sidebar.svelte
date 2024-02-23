@@ -1,24 +1,30 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
   import Tree from "./Tree.svelte";
   import ChooseRoot from "./ChooseRoot.svelte";
 
     let componentStructure = [];
     onMount(() => {
 
-      window.addEventListener("message", (event) => {
+      window.addEventListener("message",  (event) => {
         const structure = event.data;
         switch(structure.type){
           case "structure":
-            componentStructure = [structure.value, ...componentStructure];
+            componentStructure = [structure.value];
+            console.log(componentStructure);
             break;
         }
       });
       window.addEventListener('resize', (event) => {
         tsvscode.postMessage({ type: 'resize', value: 'resize' });
+        //ensures there is only one tree rendered
+        if (componentStructure.length >= 1) {
+          componentStructure = componentStructure.slice(0, 1);
+        }
       })
     })
   
+    setContext('componentStructure', componentStructure);
   </script>
 
   <main>
@@ -35,7 +41,7 @@
     
   </main>
 
-  <style>  
+  <style>
     .header {
       display: flex;
       flex-direction: column;

@@ -5,7 +5,7 @@ import { getSvelteFileNames } from './getSvelteFileNames';
 import { getRootContent } from './rootContent';
 
 export async function activate(context: vscode.ExtensionContext) {
-  vscode.commands.executeCommand('svisualize.sendFileNames');
+  await vscode.commands.executeCommand('svisualize.sendFileNames');
 
   let rootPath: string;
   const folders = vscode.workspace.workspaceFolders;
@@ -25,13 +25,15 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
-      await vscode.commands.executeCommand(
-        'workbench.action.webview.reloadWebviewAction'
-      );
+      
       // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
       //create an edge case if rootPath returns undefined
       if (rootVal) {
+        await vscode.commands.executeCommand(
+          'workbench.action.webview.reloadWebviewAction'
+        );
         const root: string = await getRootContent(rootPath, rootVal)!;
+
         const result = await getComponentStructure(rootPath, rootVal, root);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
