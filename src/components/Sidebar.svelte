@@ -14,21 +14,19 @@
             break;
         }
       });
+      window.addEventListener('resize', (event) => {
+        tsvscode.postMessage({ type: 'resize', value: 'resize' });
+      })
     })
   
   </script>
 
   <main>
     <div class="header">
-      <h1>Render your component tree!</h1>
-
-
-      <button type="submit" on:click={(() => {
-        tsvscode.postMessage({ type: 'resize', value: 'resize' });
-      })}>Resize</button>
+      <!-- <h1>Render your component tree!</h1> -->
+      <ChooseRoot/>
     </div>
 
-    <ChooseRoot/>
     <div id="tree-wrapper">
     {#if componentStructure.length > 0}
       <Tree {componentStructure} />
@@ -39,7 +37,7 @@
 
   <style>
     h1 {
-      color: #dd9e46;
+      color: #EFD2A9;
       text-align: center;
       font-family: "Arial";      
     }
