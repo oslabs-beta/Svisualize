@@ -34,9 +34,7 @@
             <option value={file}>{file}</option>
         {/each}
     </select>
-    
-        <!-- <p>Selected File: {selectedFile}</p> -->
-</main>
+    </main>
 
 <style>
     main {
@@ -55,7 +53,7 @@
     }
 
     h3 {
-        font-size: 28px;
+        font-size: 30px;
         text-align: center;
         font-family: "Arial";  
         font-weight: 600;
@@ -67,7 +65,7 @@
 
     select{
         /* color:#f3d9ae; */
-        font-size: 21px;
+        font-size: 20px;
         padding: 5px;
         border-radius: 5px;
     }

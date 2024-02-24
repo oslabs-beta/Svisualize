@@ -15,8 +15,8 @@
             break;
         }
       });
-      window.addEventListener('resize', (event) => {
-        tsvscode.postMessage({ type: 'resize', value: 'resize' });
+      window.addEventListener('update', (event) => {
+        tsvscode.postMessage({ type: 'update', value: 'update' });
         //ensures there is only one tree rendered
         if (componentStructure.length >= 1) {
           componentStructure = componentStructure.slice(0, 1);
@@ -29,10 +29,12 @@
 
   <main>
     <div class="header">
-      <!-- <h1>Render your component tree!</h1> -->
-      <ChooseRoot/>
+    <ChooseRoot/>
+    <button on:click={(() => {
+      tsvscode.postMessage({ type: 'update', value: 'update' });
+    })}>Update</button>
     </div>
-
+    
     <div id="tree-wrapper">
     {#if componentStructure.length > 0}
       <Tree {componentStructure} />
@@ -46,6 +48,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 5px;
+    }
+    button {
+      width: 5em;
+      height: 2em;
+      background-color: #2a2a2a;
+      color: #EFD2A9;
+      border-radius: 5px;
+      border: 1px solid #434343;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 10px;
     }
   </style>
