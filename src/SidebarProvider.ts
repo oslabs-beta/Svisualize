@@ -28,7 +28,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
-        case 'resize': {
+        case 'update': {
           if (!data.value) {
             return;
           }
