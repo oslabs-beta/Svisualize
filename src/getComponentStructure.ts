@@ -58,8 +58,6 @@ export function getComponentStructure(
       .split(/(?:\.(?=[./])|[ ;'"])+/)
       .filter((word: any) => word.trim() !== '');
 
-    console.log('filecontents', fileContentsArr);
-
     for (let i = 0; i < fileContentsArr.length; i++) {
       if (fileContentsArr[i].includes('export')) {
         currTree.props?.push(fileContentsArr[i + 2]);
@@ -98,6 +96,5 @@ export function getComponentStructure(
     }
   }
   parseFunc();
-  console.log('componentS', componentStructure);
   return componentStructure;
 }
