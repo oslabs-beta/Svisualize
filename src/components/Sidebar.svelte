@@ -17,10 +17,6 @@
       });
       window.addEventListener('resize', (event) => {
         tsvscode.postMessage({ type: 'resize', value: 'resize' });
-        //ensures there is only one tree rendered
-        if (componentStructure.length >= 1) {
-          componentStructure = componentStructure.slice(0, 1);
-        }
       })
     })
   
@@ -52,7 +48,7 @@
     button {
       width: 5em;
       height: 2em;
-      background-color: #2a2a2a;
+      background-color: #232323;
       color: #EFD2A9;
       border-radius: 5px;
       border: 1px solid #434343;

@@ -138,6 +138,7 @@
         .raise()
         .transition()
         .duration(200)
+        .style("cursor", "pointer")
         .select('text') // Select text element within the node
         .style('fill', '#ffffff'); // Change text fill color on hover
 
@@ -165,6 +166,7 @@
       d3.select(this)
         .transition()
         .duration(200)
+        .style("cursor", "default")
         .select('text') // Select text element within the node
         .style('fill', nodeText); // Reset text fill color
 
