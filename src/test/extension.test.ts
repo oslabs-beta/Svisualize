@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import { getComponentStructure } from '../getComponentStructure';
 import { getSvelteFiles } from '../getSvelteFiles';
 import { getRootContent } from '../rootContent';
-import { getRootName } from '../getRootName';
 import { getSvelteFileNames } from '../getSvelteFileNames';
 import path from 'path';
 import * as assert from 'assert';
