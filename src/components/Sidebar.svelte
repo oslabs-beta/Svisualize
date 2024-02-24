@@ -15,8 +15,8 @@
             break;
         }
       });
-      window.addEventListener('update', (event) => {
-        tsvscode.postMessage({ type: 'update', value: 'update' });
+      window.addEventListener('resize', (event) => {
+        tsvscode.postMessage({ type: 'resize', value: 'resize' });
         //ensures there is only one tree rendered
         if (componentStructure.length >= 1) {
           componentStructure = componentStructure.slice(0, 1);
