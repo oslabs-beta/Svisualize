@@ -72,7 +72,7 @@ Don't forget to give the project a star! Thank you for your support!
       <br />
       <sub><b>Lumeng Li</b></sub>
       <br />
-      <a href="" style="font-size: 10px;">Linkedin</a> |
+      <a href="https://www.linkedin.com/in/lumengli/" style="font-size: 10px;">Linkedin</a> |
       <a href="https://github.com/lumengli7">GitHub</a>
     </td>
      <td align="center">
