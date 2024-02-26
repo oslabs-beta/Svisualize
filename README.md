@@ -87,7 +87,7 @@ Don't forget to give the project a star! Thank you for your support!
       <br />
       <sub><b>Kris Fragata</b></sub>
       <br />
-      <a href="https://www.linkedin.com">Linkedin</a> |
+      <a href="https://www.linkedin.com/in/krisfragata/">Linkedin</a> |
       <a href="https://github.com/krisfragata">GitHub</a>
     </td> <td align="center">
       <img src="https://github.com/calebbelkin.png" width="140px;" alt="a photo of Nathan Peel"/>
