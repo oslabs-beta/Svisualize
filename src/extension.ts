@@ -23,10 +23,10 @@ export async function activate(context: vscode.ExtensionContext) {
     )
   );
 
+  // command to generate component structure.
+  // passes application's uri as an argument to getComponentStructure and sends results to front-end
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
-      // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
-      //create an edge case if rootPath returns undefined
       if (rootVal) {
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
@@ -46,13 +46,13 @@ export async function activate(context: vscode.ExtensionContext) {
     })
   );
 
+  // command to gather all svelte file names in application. Used to send file names to front-end
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'svisualize.sendFileNames',
       async (chosenRoot) => {
         if (rootPath) {
           const fileNames = await getSvelteFileNames(rootPath);
-          //the postMessage below sends a message with an array of all file names found in App that end in svelte
           sidebarProvider._view?.webview.postMessage({
             type: 'files',
             value: [fileNames, chosenRoot],
@@ -70,21 +70,6 @@ export async function activate(context: vscode.ExtensionContext) {
       await vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
     })
   );
-}
-
-//declare a function that renders webview content. render an html file
-function getWebviewContent(filePath: string): string {
-  return `<!DOCTYPE html>
-	<html lang="en">
-	<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Svisualize</title>
-	</head>
-	<body>
-				${filePath}
-	</body>
-	</html>`;
 }
 
 // This method is called when your extension is deactivated

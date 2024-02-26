@@ -28,6 +28,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
+        case 'resize': {
+          if (!data.value) {
+            return;
+          }
+          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
+          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+          break;
+        }
         case 'update': {
           if (!data.value) {
             return;
@@ -40,7 +48,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           if (!data.value) {
             return;
           }
-
           rootVal = data.value;
           await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
           vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);

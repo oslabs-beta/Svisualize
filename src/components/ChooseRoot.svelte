@@ -1,26 +1,26 @@
 <script>
-    import { onMount } from "svelte";
+import { onMount } from "svelte";
 
-    let fileNamesArray = [];
-    let selectedFile = '--Select Your Root File--';
+let fileNamesArray = [];
+let selectedFile;
 
-    onMount(() => {
-        window.addEventListener("message", (event) => {
-            const files = event.data;
-            switch(files.type){
-                case "files":
-                fileNamesArray = files.value[0];
-                selectedFile = files.value[1];
-                break;
-            }
-        })
-    })
-
-    function handleSelectChange(event) {
-        selectedFile = event.target.value;
-        {tsvscode.postMessage({ type: 'selection', value: selectedFile })}
+onMount(() => {
+  selectedFile = '--Select Your Root File--';
+  window.addEventListener("message", (event) => {
+    const files = event.data;
+    switch(files.type){
+      case "files":
+        fileNamesArray = files.value[0];
+        selectedFile = files.value[1];
+        break;
     }
+  })
+})
 
+function handleSelectChangge(event) {
+  selectedFile = event.target.value;
+  {tsvscode.postMessage({ type: 'selection', value: selectedFile })}
+}
 </script>
 
 <main>
@@ -35,7 +35,6 @@
         {/each}
     </select>
     </main>
-
 <style>
     main {
         display: flex;
@@ -63,11 +62,17 @@
         text-align: center;
     }
 
+    option:hover {
+        cursor: pointer;
+    }
+
     select{
-        /* color:#f3d9ae; */
         font-size: 20px;
         padding: 5px;
         border-radius: 5px;
     }
 
+    select:hover {
+        cursor: pointer;
+    }
 </style>

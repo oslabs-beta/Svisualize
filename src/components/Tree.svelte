@@ -4,22 +4,11 @@
 
   export let componentStructure;
 
-  // const componentStructure = readable([], set => {
-  //   const unsubscribe = getContext('componentStructure', (value) => {
-  //     set(value);
-  //   });
-
-  //   return unsubscribe;
-  // });
-
-  let nodeText = '#EFD2A9';
-
-  
   afterUpdate(() => renderTree());
 
   function renderTree() {
+    //removes tree @ start to prevent duplicate trees from rendering on load
     d3.select("#tree-container svg").remove();
-    //sets width and height to match #tree-container - changes on render button
     let treeContainer = document.getElementById('tree-container');
     let containerWidth = treeContainer.clientWidth;
     let containerHeight = treeContainer.clientHeight * 4;
@@ -29,16 +18,17 @@
       .append('svg')
       .attr('width', containerWidth)
       .attr('height', containerHeight)
-      .style('overflow', 'visible') //prevents nodes from getting cutoff
+      .style('overflow', 'visible') 
       .append('g');
 
+    //create div to store tooltip to show props
     let div = d3
       .select('body')
       .append('div')
       .attr('class', 'tooltip')
       .style('opacity', 1e-6)
       .style('position', 'absolute')
-      .style('padding', '8px')
+      .style('padding', '10px')
       .style('background', '#2a2a2a')
       .style('border', 'solid 2px #434343')
       .style('border-radius', '5px')
@@ -53,7 +43,8 @@
     let nodes = treeDataTransformed.descendants();
     let links = treeDataTransformed.links();
 
-    let padding = 5; //padding for rectangles
+    let padding = 5; 
+    let nodeText = '#EFD2A9';
 
     let diagonal = d3
       .linkVertical()
@@ -104,7 +95,7 @@
       .style('fill', nodeText)
       .style('font-size', '16px')
       .attr("font-weight",function(d,i) {return 500;})
-      .call(getTextBox);
+      .call(getTextBox); //call function after all text attributes/styles are finalized
 
     //inserts a rectangle behind text
     node
@@ -125,24 +116,25 @@
       .style('stroke', '#2c8078')
       .style('stroke-width', 2);
 
+    //dynamically changes rect to match size of text
     function getTextBox(selection) {
       selection.each(function (d) {
         d.bbox = this.getBBox();
       });
     }
 
+    //hover events for mouseover, mousemove, and mouseout
     function mouseover() {
       div.transition().duration(200).style('opacity', 1);
-
       d3.select(this)
         .raise()
         .transition()
         .duration(200)
-        .select('text') // Select text element within the node
-        .style('fill', '#ffffff'); // Change text fill color on hover
-
+        .style("cursor", "pointer")
+        .select('text')
+        .style('fill', '#ffffff');
       d3.select(this)
-        .select('rect') // Select rectangle element within the node
+        .select('rect')
         .transition()
         .duration(200)
         .style('fill', '#2c8078');
@@ -161,15 +153,14 @@
 
     function mouseout() {
       div.transition().duration(300).style('opacity', 1e-6);
-
       d3.select(this)
         .transition()
         .duration(200)
-        .select('text') // Select text element within the node
-        .style('fill', nodeText); // Reset text fill color
-
+        .style("cursor", "default")
+        .select('text') 
+        .style('fill', nodeText); 
       d3.select(this)
-        .select('rect') // Select rectangle element within the node
+        .select('rect') 
         .transition()
         .duration(200)
         .style('fill', '#1d414c');
