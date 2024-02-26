@@ -80,7 +80,7 @@ Don't forget to give the project a star! Thank you for your support!
       <br />
       <sub><b>Jason Huang</b></sub>
       <br />
-      <a href="https://www.linkedin.com">Linkedin</a> |
+      <a href="https://www.linkedin.com/in/jasonhswe/">Linkedin</a> |
       <a href="https://github.com/itsdayson">GitHub</a>
     </td> <td align="center">
       <img src="https://github.com/krisfragata.png" width="140px;" alt="a photo of Jordan Querubin"/>
