@@ -94,7 +94,7 @@ Don't forget to give the project a star! Thank you for your support!
       <br />
       <sub><b>Caleb Belkin</b></sub>
       <br />
-      <a href="https://www.linkedin.com">Linkedin</a> |
+      <a href="https://www.linkedin.com/in/caleb-belkin/">Linkedin</a> |
       <a href="https://github.com/calebbelkin">GitHub</a>
     </td>     
   </tr>
