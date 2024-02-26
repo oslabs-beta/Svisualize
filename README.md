@@ -24,13 +24,13 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 
 ## Table of Contents
 
-- 🖥️ [Features](#features)
-- ⚙️ [Getting Started](#getting-started)
-- 🛠 [Roadmap](#roadmap)
-- 🔗 [How to Contribute](#how-to-contribute)
-- 👩🏻‍💻 [Founders](#founders)
+- 🖥️ [Overview](#overview)
+- ⚙️ [Installation](#installation)
+- 🛠 [Getting Started](#getting-started)
+- 🔗 [Contributions](#contributions)
+- 👩🏻‍💻 [Meet Our Team](#meet-our-team)
 
-## Features
+## Overview
 
 With Svisualize you can:
 
@@ -38,19 +38,19 @@ With Svisualize you can:
 - View parent-child hierarchy
 - View props present within each component by hovering it's component node
 
-## Getting Started
+## Installation
 
 1. Install Svisualize from the extension marketplace
 2. Click on the tree icon on the activity bar to start the extension
 (Insert gif here)
 3. Label your root Svelte file as **App.svelte** or **+page.svelte** if using SvelteKit
 
-## Roadmap
+## Getting Started
 
 - Add additional functionality within the visualizer
 - More UX/UI options within visualizer (e.g. changing color of nodes based on user preference)
 
-## How to Contribute
+## Contributions
 
 Svisualize is an open source project and we welcome iterations and contributions. If you have a suggestion, please follow the steps below or open an issue to discuss your idea. 
 
@@ -62,7 +62,7 @@ Svisualize is an open source project and we welcome iterations and contributions
 
 Don't forget to give the project a star! Thank you for your support!
 
-## Founders
+## Meet Our Team
 
 <table>
   <tr>
