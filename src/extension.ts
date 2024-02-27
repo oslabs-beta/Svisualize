@@ -25,8 +25,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
-      // declare a constant result and assign it the evaluated result of invoking getComponentStructure on rootPath (which evaluates the complete component structure)
-      //create an edge case if rootPath returns undefined
       if (rootVal) {
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
@@ -67,24 +65,9 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.activate', async (rootVal) => {
       await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-      await vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+      vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
     })
   );
-}
-
-//declare a function that renders webview content. render an html file
-function getWebviewContent(filePath: string): string {
-  return `<!DOCTYPE html>
-	<html lang="en">
-	<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Svisualize</title>
-	</head>
-	<body>
-				${filePath}
-	</body>
-	</html>`;
 }
 
 // This method is called when your extension is deactivated

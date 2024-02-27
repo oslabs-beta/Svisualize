@@ -4,14 +4,6 @@
 
   export let componentStructure;
 
-  // const componentStructure = readable([], set => {
-  //   const unsubscribe = getContext('componentStructure', (value) => {
-  //     set(value);
-  //   });
-
-  //   return unsubscribe;
-  // });
-
   let nodeText = '#EFD2A9';
 
   
