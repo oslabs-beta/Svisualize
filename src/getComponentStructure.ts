@@ -30,6 +30,7 @@ export function getComponentStructure(
     }
   }
 
+  //recursive function to look inside root and identify children
   function parseFunc(
     fileContents = root,
     currTree = componentStructure,

@@ -20,7 +20,6 @@
         selectedFile = event.target.value;
         {tsvscode.postMessage({ type: 'selection', value: selectedFile })}
     }
-
 </script>
 
 <main>
@@ -34,7 +33,7 @@
             <option value={file}>{file}</option>
         {/each}
     </select>
-    </main>
+</main>
 
 <style>
     main {
@@ -64,10 +63,8 @@
     }
 
     select{
-        /* color:#f3d9ae; */
         font-size: 20px;
         padding: 5px;
         border-radius: 5px;
     }
-
 </style>

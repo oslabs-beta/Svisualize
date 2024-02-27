@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { getSvelteFiles } = require('./getSvelteFiles');
 
-//parses through directory and returns the content of rootDirectory
+//parses through directory and returns the raw code of root file
 export function getRootContent(rootPath: string, rootVal: string) {
   const filePaths = getSvelteFiles(rootPath);
   let root;

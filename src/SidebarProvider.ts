@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import { getNonce } from './getNonce';
-// import { getRootValue } from './getRootValue';
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -25,7 +24,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     });
 
     let rootVal = '';
-
+    //extension listener for svelte messages
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
         case 'resize': {
@@ -61,14 +60,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           vscode.workspace.openTextDocument(vscodeUri).then((document) => {
             vscode.window.showTextDocument(document);
           });
-          break;
-        }
-        case 'resize': {
-          if (!data.value) {
-            return;
-          }
-          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
           break;
         }
       }
