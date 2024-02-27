@@ -1,14 +1,31 @@
 {
   "name": "svisualize",
   "displayName": "Svisualize",
+  "publisher":"Svisualize-dev",
   "description": "visualize your svelte components as you code",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oslabs-beta/Svisualize.git"
+  },
   "engines": {
     "vscode": "^1.86.0"
   },
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "svelte",
+    "d3",
+    "svelte components",
+    "hierarchy tree",
+    "parent-child",
+    "visualizer",
+    "extension",
+    "webview"
+  ],
+  "license": "MIT",
+  "pricing": "Free",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
