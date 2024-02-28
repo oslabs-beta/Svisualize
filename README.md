@@ -42,11 +42,15 @@ Large-scale Javascript projects can contain a multitude of components. Svelte, a
 
 ## Installation
 
-Svisualize extension can be installed through the VS Code Marketplace. Start by clicking the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl/Cmd+Shift+X). Search for 'svisualize' and click the "install" button. Upon completion, VS Code will have installed the extension and Svisualize is ready for use.
+Svisualize extension can be installed through the VS Code Marketplace. 
+1. Start by clicking the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl/Cmd+Shift+X).
+2. Search for 'svisualize' and click the "install" button.
 
 <p align="center">
   <img src="media/marketplace.jpg" alt="marketplace">
 </p>
+
+3. Upon completion, VS Code will have installed the extension and Svisualize is ready for use.
 
 ## Getting Started
 
@@ -56,6 +60,7 @@ After Svisualize is installed in VS Code,
 <p align="center">
   <img src="media/extension.jpg" alt="marketplace">
 </p>
+
 - Select a root file to render your first tree
 
 ## Contributions
