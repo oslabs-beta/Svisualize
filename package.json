@@ -3,7 +3,8 @@
   "displayName": "Svisualize",
   "publisher":"Svisualize-dev",
   "description": "visualize your svelte components as you code",
-  "version": "0.0.1",
+  "version": "0.0.4",
+  "icon": "media/logo.jpg",
   "repository": {
     "type": "git",
     "url": "https://github.com/oslabs-beta/Svisualize.git"
