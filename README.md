@@ -1,6 +1,5 @@
 <div align="center">
-   <!-- PROJECT LOGO -->
-  <h1 align="center"><b>Svisualize</b></h1>
+   <img src="media/banner.png" width="800"/>
 </div>
 
 <p align="center">
@@ -37,8 +36,10 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 Large-scale Javascript projects can contain a multitude of components. Svelte, a newer Javascript framework, lacks a component visualization tool within VSCode. Svisualize is a VS Code extension that gives developers the ability to visualize their Svelte components as they create their project. With Svisualize you can:
 
 - Visualize each Svelte component as a node on the component tree
-- View parent-child hierarchy
+- View parent-child hierarchy from ANY root file
 - View props present within each component by hovering it's component node
+- Open files on node click
+- Update the tree structure on change in codebase by clicking the update button
 
 ## Installation
 
