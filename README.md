@@ -67,7 +67,12 @@ After Svisualize is installed in VS Code,
 
 ## Roadmap
 - Add additional functionality within the visualizer
-- More UX/UI options within visualizer (e.g. changing color of nodes based on user preference)
+    - Delete files on node click
+    - Create new child files from parent nodes
+- More UX/UI options within visualizer (e.g. changing color of nodes based on user preferences)
+- Create a light mode on toggle for webview
+- Addition of a status bar button to toggle extension activation and deactivation
+- Implement more testing
 
 ## Contributions
 
