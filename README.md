@@ -32,7 +32,8 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 - 👩🏻‍💻 [Meet Our Team](#meet-our-team)
 
 ## Overview
-![demo](media/demo.gif)
+
+![demo](media/demo.GIF)
 Large-scale Javascript projects can contain a multitude of components. Svelte, a newer Javascript framework, lacks a component visualization tool within VSCode. Svisualize is a VS Code extension that gives developers the ability to visualize their Svelte components as they create their project. With Svisualize you can:
 
 - Visualize each Svelte component as a node on the component tree
@@ -48,14 +49,15 @@ Svisualize extension can be installed through the VS Code Marketplace. Start by 
 
 ## Getting Started
 
-After Svisualize is installed in VS Code, 
+After Svisualize is installed in VS Code,
+
 - You will find a new tree icon added to the Activity Bar on the left-hand side. Click on it to launch the extension
-![extension](media/extension.jpg)
+  ![extension](media/extension.jpg)
 - Select a root file to render your first tree
 
 ## Contributions
 
-Svisualize is an open source project and we welcome iterations and contributions. If you have a suggestion, please follow the steps below or open an issue to discuss your idea. 
+Svisualize is an open source project and we welcome iterations and contributions. If you have a suggestion, please follow the steps below or open an issue to discuss your idea.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b newFeature`)
@@ -101,4 +103,3 @@ Don't forget to give the project a star! Thank you for your support!
     </td>     
   </tr>
 </table>
-
