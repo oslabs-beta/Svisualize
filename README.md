@@ -64,8 +64,11 @@ After Svisualize is installed in VS Code,
 </p>
 
 - Select a root file to render your first tree
+  
+** Svisualize currently only supports **SINGLE PAGE** SvelteKit applications **
 
 ## Roadmap
+- Support for mutli-page SvelteKit applications
 - Add additional functionality within the visualizer
     - Delete files on node click
     - Create new child files from parent nodes
