@@ -8,15 +8,22 @@ export function getSvelteFiles(dir: string): string[] | string {
   }
   const files = fs.readdirSync(dir);
   let filePathArray: string[] = [];
+  let stopTraversal = false;
 
   files.forEach((file: string) => {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
 
+    //only allows root +page.svelte to render
+    if (stopTraversal) return;
+
     if (stat.isDirectory()) {
       if (file !== 'node_modules' && file !== '.svelte-kit') {
         filePathArray = filePathArray.concat(getSvelteFiles(filePath));
       }
+    } else if (path.basename(filePath) === '+page.svelte') {
+      stopTraversal = true;
+      filePathArray.push(filePath);
     } else if (path.extname(filePath) === '.svelte') {
       filePathArray.push(filePath);
     }
