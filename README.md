@@ -27,6 +27,7 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 - 🖥️ [Overview](#overview)
 - ⚙️ [Installation](#installation)
 - 🛠 [Getting Started](#getting-started)
+- 🗺️ [Roadmap](#roadmap)
 - 🔗 [Contributions](#contributions)
 - 👩🏻‍💻 [Meet Our Team](#meet-our-team)
 
@@ -63,6 +64,10 @@ After Svisualize is installed in VS Code,
 </p>
 
 - Select a root file to render your first tree
+
+## Roadmap
+- Add additional functionality within the visualizer
+- More UX/UI options within visualizer (e.g. changing color of nodes based on user preference)
 
 ## Contributions
 
