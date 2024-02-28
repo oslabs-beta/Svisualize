@@ -59,7 +59,7 @@ After Svisualize is installed in VS Code,
 
 - You will find a new tree icon added to the Activity Bar on the left-hand side. Click on it to launch the extension
 <p align="center">
-  <img src="media/extension.jpg" alt="marketplace">
+  <img src="media/VSCextension.jpg" alt="marketplace">
 </p>
 
 - Select a root file to render your first tree
