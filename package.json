@@ -3,7 +3,7 @@
   "displayName": "Svisualize",
   "publisher":"Svisualize-dev",
   "description": "visualize your svelte components as you code",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "icon": "media/logo.jpg",
   "repository": {
     "type": "git",
