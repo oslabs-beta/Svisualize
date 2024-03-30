@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // returns an array of svelte file uris in application. Takes in root uri as argument
 export function getSvelteFiles(dir: string): string[] | string {

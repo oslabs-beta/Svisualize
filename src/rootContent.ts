@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 const { getSvelteFiles } = require('./getSvelteFiles');
 
 //parses through directory and returns the raw code of root file

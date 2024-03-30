@@ -31,16 +31,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+          await vscode.commands.executeCommand('svisualize.activate', rootVal);
           break;
         }
         case 'update': {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+          await vscode.commands.executeCommand('svisualize.activate', rootVal);
           break;
         }
         case 'selection': {
@@ -48,8 +46,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           rootVal = data.value;
-          await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-          vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+          await vscode.commands.executeCommand('svisualize.activate', rootVal);
           break;
         }
         case 'uri': {

@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { getSvelteFiles } = require('./getSvelteFiles');
+import fs from 'fs';
+import path from 'path';
+import { getSvelteFiles } from'./getSvelteFiles';
 
 export function getComponentStructure(
   rootPath: string,
