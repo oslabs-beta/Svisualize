@@ -2,27 +2,30 @@ import fs from 'fs';
 import path from 'path';
 import { getSvelteFiles } from'./getSvelteFiles';
 
+ // Define a class constructor to store files in a hierarchical structure
+ class TreeNode {
+  name: string;
+  uri?: string;
+  children: TreeNode[];
+  props?: string[];
+
+  constructor(name: string, uri?: string) {
+    this.name = name;
+    this.uri = uri;
+    this.children = [];
+    this.props = [];
+  }
+}
+
 export function getComponentStructure(
   rootPath: string,
   rootName: string,
   root: string
-) {
+): TreeNode {
   const filePaths = getSvelteFiles(rootPath);
 
-  // Define a class constructor to store files in a hierarchical structure
-  class TreeNode {
-    name: string;
-    uri?: string;
-    children: TreeNode[];
-    props?: string[];
+ 
 
-    constructor(name: string, uri?: string) {
-      this.name = name;
-      this.uri = uri;
-      this.children = [];
-      this.props = [];
-    }
-  }
   const componentStructure = new TreeNode(rootName);
   for (let i = 0; i < filePaths.length; i++) {
     if (filePaths[i].includes(rootName)) {

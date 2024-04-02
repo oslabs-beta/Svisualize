@@ -26,7 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // command to generate component structure.
   // passes application's uri as an argument to getComponentStructure and sends results to front-end
   context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
+    vscode.commands.registerCommand('svisualize.sendUri', async (rootVal: string) => {
       if (rootVal) {
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
@@ -50,7 +50,7 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'svisualize.sendFileNames',
-      async (chosenRoot) => {
+      async (chosenRoot: string) => {
         if (rootPath) {
           const fileNames = await getSvelteFiles(rootPath);
           sidebarProvider._view?.webview.postMessage({
