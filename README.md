@@ -1,10 +1,9 @@
 <div align="center">
-   <!-- PROJECT LOGO -->
-  <h1 align="center"><b>Svisualize</b></h1>
+   <img src="media/banner.png" width="800"/>
 </div>
 
 <p align="center">
-Svisualize is a Svelte component visualizer for developers to see the shape of their application as they code. <br/>Find out more at <a href="">Svisualize</a>!
+Svisualize is a Svelte component visualizer for developers to see the shape of their application as they code. <br/>Find out more at <a href="https://svisualize.dev">Svisualize</a>!
 <br/>
 </p>
 
@@ -28,33 +27,59 @@ Svisualize is a Svelte component visualizer for developers to see the shape of t
 - 🖥️ [Overview](#overview)
 - ⚙️ [Installation](#installation)
 - 🛠 [Getting Started](#getting-started)
+- 🗺️ [Roadmap](#roadmap)
 - 🔗 [Contributions](#contributions)
 - 👩🏻‍💻 [Meet Our Team](#meet-our-team)
 
 ## Overview
 
-Large-scale Javascript projects can contain a multitude of components. Svelte, a newer Javascript framework, lacks a component visualization tool within VSCode. Svisualize is a VS Code extension that gives developers the ability to visualize their Svelte components as they create their project. With Svisualize you can:
+![demo](media/demo.GIF)
+Large-scale Javascript projects can contain a multitude of components. Svelte, a newer Javascript framework, lacks a component visualization tool within Visual Studio Code. Svisualize is a VS Code extension that gives developers the ability to visualize their Svelte components as they create their project. With Svisualize you can:
 
 - Visualize each Svelte component as a node on the component tree
-- View parent-child hierarchy
+- View parent-child hierarchy from ANY root file
 - View props present within each component by hovering it's component node
+- Open files on node click
+- Update the tree structure on change in codebase by clicking the update button
 
 ## Installation
 
-Svisualize extension can be installed through the VS Code Marketplace. Start by clicking the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl/Cmd+Shift+X). Search for 'svisualize' and click the "install" button. Upon completion, VS Code will have installed the extension and Svisualize is ready for use.
+Svisualize extension can be installed through the VS Code Marketplace. 
+1. Start by clicking the Extensions icon in the Activity Bar on the side of VS Code or by using the View: Extensions command (Ctrl/Cmd+Shift+X).
+2. Search for 'svisualize' and click the "install" button.
 
-(Marketplace picture)
+<p align="center">
+  <img src="media/marketplace.jpg" alt="marketplace">
+</p>
+
+3. Upon completion, VS Code will have installed the extension and Svisualize is ready for use.
 
 ## Getting Started
 
-After Svisualize is installed in VS Code, 
-- You will find a new icon added to the Activity Bar on the left-hand side. Click on it to launch the extension (Insert gif here)
-- Click on the tree icon on the activity bar to start the extension (Insert gif here)
-- Add/Remove import and export statements (Insert gif here)
+After Svisualize is installed in VS Code,
+
+- You will find a new tree icon added to the Activity Bar on the left-hand side. Click on it to launch the extension
+<p align="center">
+  <img src="media/VSCextension.jpg" alt="marketplace">
+</p>
+
+- Select a root file to render your first tree
+  
+** Svisualize currently only supports **SINGLE PAGE** SvelteKit applications **
+
+## Roadmap
+- Support for mutli-page SvelteKit applications
+- Add additional functionality within the visualizer
+    - Delete files on node click
+    - Create new child files from parent nodes
+- More UX/UI options within visualizer (e.g. changing color of nodes based on user preferences)
+- Create a light mode on toggle for webview
+- Addition of a status bar button to toggle extension activation and deactivation
+- Implement more testing
 
 ## Contributions
 
-Svisualize is an open source project and we welcome iterations and contributions. If you have a suggestion, please follow the steps below or open an issue to discuss your idea. 
+Svisualize is an open source project and we welcome iterations and contributions. If you have a suggestion, please follow the steps below or open an issue to discuss your idea.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b newFeature`)
@@ -100,4 +125,3 @@ Don't forget to give the project a star! Thank you for your support!
     </td>     
   </tr>
 </table>
-
