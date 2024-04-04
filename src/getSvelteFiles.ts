@@ -1,11 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // returns an array of svelte file uris in application. Takes in root uri as argument
-export function getSvelteFiles(dir: string): string[] | string {
-  if (dir === '' || dir === undefined) {
-    return 'no such file or directory';
+export function getSvelteFiles(dir: string): string[]{
+  
+  if (dir === undefined){
+    throw new Error(`Root file not found for value '${dir}'`);
   }
+  
   const files = fs.readdirSync(dir);
   let filePathArray: string[] = [];
   let stopTraversal = false;
@@ -28,5 +30,6 @@ export function getSvelteFiles(dir: string): string[] | string {
       filePathArray.push(filePath);
     }
   });
+
   return filePathArray;
 }

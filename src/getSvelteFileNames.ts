@@ -27,3 +27,4 @@ export function getSvelteFileNames(dir: string): string[] {
   });
   return fileNames;
 }
+

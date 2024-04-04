@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import { getComponentStructure } from '../getComponentStructure';
 import { getSvelteFiles } from '../getSvelteFiles';
 import { getRootContent } from '../rootContent';
-import { getSvelteFileNames } from '../getSvelteFileNames';
 import path from 'path';
 import * as assert from 'assert';
 
@@ -63,8 +62,8 @@ suite('getComponentStructure Suite', () => {
 
 suite('getSvelteFileNames Suite', () => {
   const rootPath = path.resolve(__dirname, '..', '..');
-  let result = getSvelteFileNames(rootPath);
-  let name = getSvelteFileNames(rootPath);
+  let result = getSvelteFiles(rootPath);
+  let name = getSvelteFiles(rootPath);
 
   test('getSvelteFileNames should return an array of strings', () => {
     assert.equal(Array.isArray(result), true);

@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
 import { getComponentStructure } from './getComponentStructure';
-import { getSvelteFileNames } from './getSvelteFileNames';
 import { getRootContent } from './rootContent';
+import { getSvelteFiles } from './getSvelteFiles';
 
 export async function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendFileNames');
@@ -26,7 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // command to generate component structure.
   // passes application's uri as an argument to getComponentStructure and sends results to front-end
   context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.sendUri', async (rootVal) => {
+    vscode.commands.registerCommand('svisualize.sendUri', async (rootVal: string) => {
       if (rootVal) {
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
@@ -50,9 +50,9 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       'svisualize.sendFileNames',
-      async (chosenRoot) => {
+      async (chosenRoot: string) => {
         if (rootPath) {
-          const fileNames = await getSvelteFileNames(rootPath);
+          const fileNames = await getSvelteFiles(rootPath);
           sidebarProvider._view?.webview.postMessage({
             type: 'files',
             value: [fileNames, chosenRoot],
