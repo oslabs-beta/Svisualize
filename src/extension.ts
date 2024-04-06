@@ -31,9 +31,9 @@ export async function activate(context: vscode.ExtensionContext) {
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
         );
-        const root: string = await getRootContent(rootPath, rootVal)!;
+        const rootContent: string = await getRootContent(rootPath, rootVal)!;
 
-        const result = await getComponentStructure(rootPath, rootVal, root);
+        const result = await getComponentStructure(rootPath, rootVal, rootContent);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
           value: result,
