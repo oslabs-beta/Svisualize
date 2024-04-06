@@ -8,7 +8,7 @@ export async function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendFileNames');
 
   let rootPath: string;
-  const folders = vscode.workspace.workspaceFolders;
+  const folders = await vscode.workspace.workspaceFolders;
   if (folders && folders.length > 0) {
     rootPath = folders[0].uri.fsPath;
   } else {
@@ -51,15 +51,11 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       'svisualize.sendFileNames',
       async (chosenRoot: string) => {
-        if (rootPath) {
           const fileNames = await getSvelteFiles(rootPath);
           sidebarProvider._view?.webview.postMessage({
             type: 'files',
             value: [fileNames, chosenRoot],
           });
-        } else {
-          vscode.window.showInformationMessage('must open a workspace folder');
-        }
       }
     )
   );

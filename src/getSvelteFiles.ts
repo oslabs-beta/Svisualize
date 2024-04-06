@@ -17,7 +17,7 @@ export function getSvelteFiles(dir: string): string[]{
     const stat = fs.statSync(filePath);
 
     //only allows root +page.svelte to render
-    if (stopTraversal) return;
+    if (stopTraversal) {return;}
 
     if (stat.isDirectory()) {
       if (file !== 'node_modules' && file !== '.svelte-kit') {
