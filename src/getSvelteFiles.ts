@@ -28,7 +28,7 @@ export function getSvelteFiles(dir: string, justFileName: boolean = false): stri
       if (path.basename(filePath) === '+page.svelte') {
         stopTraversal = true;
       }
-      if(justFile)  {filePathArray.push(file);}
+      if(justFileName)  {filePathArray.push(file);}
       else {filePathArray.push(filePath);}
     }
   });
