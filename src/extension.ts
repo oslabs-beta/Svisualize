@@ -51,7 +51,8 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       'svisualize.sendFileNames',
       async (chosenRoot: string) => {
-          const fileNames = await getSvelteFiles(rootPath);
+          const fileNames = await getSvelteFiles(rootPath, true);
+          console.log(fileNames);
           sidebarProvider._view?.webview.postMessage({
             type: 'files',
             value: [fileNames, chosenRoot],

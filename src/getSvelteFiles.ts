@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 // returns an array of svelte file uris in application. Takes in root uri as argument
-export function getSvelteFiles(dir: string): string[]{
+export function getSvelteFiles(dir: string, justFile: boolean = false): string[]{
   
   if (dir === undefined){
     throw new Error(`Root file not found for value '${dir}'`);
@@ -21,13 +21,15 @@ export function getSvelteFiles(dir: string): string[]{
 
     if (stat.isDirectory()) {
       if (file !== 'node_modules' && file !== '.svelte-kit') {
-        filePathArray = filePathArray.concat(getSvelteFiles(filePath));
+        filePathArray = filePathArray.concat(getSvelteFiles(filePath, justFile));
       }
-    } else if (path.basename(filePath) === '+page.svelte') {
-      stopTraversal = true;
-      filePathArray.push(filePath);
-    } else if (path.extname(filePath) === '.svelte') {
-      filePathArray.push(filePath);
+    }
+    else if (path.extname(filePath) === '.svelte') {
+      if (path.basename(filePath) === '+page.svelte') {
+        stopTraversal = true;
+      }
+      if(justFile)  {filePathArray.push(file);}
+      else {filePathArray.push(filePath);}
     }
   });
 
