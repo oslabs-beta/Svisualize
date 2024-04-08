@@ -6,7 +6,8 @@ import { getSvelteFiles } from './getSvelteFiles';
 
 export async function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendFileNames');
-
+  let countFile = 0;
+  let countActivate = 0;
   let rootPath: string;
   const folders = await vscode.workspace.workspaceFolders;
   if (folders && folders.length > 0) {
@@ -28,6 +29,8 @@ export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand('svisualize.sendUri', async (rootVal: string) => {
       if (rootVal) {
+        countActivate++;
+        console.log("activated: ", countActivate);
         await vscode.commands.executeCommand(
           'workbench.action.webview.reloadWebviewAction'
         );
@@ -51,8 +54,9 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand(
       'svisualize.sendFileNames',
       async (chosenRoot: string) => {
+          countFile++;
+          console.log("file: ",countFile);
           const fileNames = await getSvelteFiles(rootPath, true);
-          console.log(fileNames);
           sidebarProvider._view?.webview.postMessage({
             type: 'files',
             value: [fileNames, chosenRoot],

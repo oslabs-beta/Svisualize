@@ -25,8 +25,7 @@ export function getComponentStructure(
 ): TreeNode {
   const filePaths = getSvelteFiles(rootPath);
   const fileMap = getSvelteMap(rootPath);
-  // console.log("file map: ", fileMap);
-  // console.log("file paths: ", filePaths);
+
 
   const componentStructure = new TreeNode(rootName);
   for (let i = 0; i < filePaths.length; i++) {
