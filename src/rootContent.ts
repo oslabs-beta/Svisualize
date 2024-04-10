@@ -18,6 +18,5 @@ export function getRootContent(rootPath: string, rootVal: string): string {
   if (root === undefined) {
     throw new Error(`Root file not found for value '${rootVal}'`);
   }
-
   return root;
 }

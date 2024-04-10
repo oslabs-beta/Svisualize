@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { getSvelteFiles } from'./getSvelteFiles';
+import { getSvelteMap } from './SvelteMap';
 
  // Define a class constructor to store files in a hierarchical structure
  class TreeNode {
@@ -23,8 +24,8 @@ export function getComponentStructure(
   root: string
 ): TreeNode {
   const filePaths = getSvelteFiles(rootPath);
+  const fileMap = getSvelteMap(rootPath);
 
- 
 
   const componentStructure = new TreeNode(rootName);
   for (let i = 0; i < filePaths.length; i++) {
@@ -32,6 +33,7 @@ export function getComponentStructure(
       componentStructure.uri = filePaths[i];
     }
   }
+
 
   //recursive function to look inside root and identify children
   function parseFunc(
