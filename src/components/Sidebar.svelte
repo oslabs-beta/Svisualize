@@ -4,6 +4,7 @@
   import ChooseRoot from "./ChooseRoot.svelte";
 
   let componentStructure = [];
+  let structureChangeCount = 0;
 
   onMount(() => {
     //listener for message containing component structure from ext
@@ -11,6 +12,9 @@
       const structure = event.data;
       switch(structure.type){
         case "structure":
+          // if (componentStructure !== structure.value) 
+          structureChangeCount++;
+          console.log("changed structure: ", structureChangeCount);
           componentStructure = [structure.value];
           console.log(componentStructure);
           break;

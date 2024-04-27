@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { SidebarProvider } from './SidebarProvider';
-import { getComponentStructure } from './getComponentStructure';
+import { getComponentStructure, TreeNode } from './getComponentStructure';
 import { getRootContent } from './rootContent';
 import { getSvelteFiles } from './getSvelteFiles';
 
@@ -8,6 +8,8 @@ export async function activate(context: vscode.ExtensionContext) {
   vscode.commands.executeCommand('svisualize.sendFileNames');
   let countFile = 0;
   let countActivate = 0;
+  let componentStructure: TreeNode;
+  let svelteFiles: string[];
   let rootPath: string;
   const folders = await vscode.workspace.workspaceFolders;
   if (folders && folders.length > 0) {
@@ -36,10 +38,10 @@ export async function activate(context: vscode.ExtensionContext) {
         );
         const rootContent: string = await getRootContent(rootPath, rootVal)!;
 
-        const result = await getComponentStructure(rootPath, rootVal, rootContent);
+        componentStructure = await getComponentStructure(rootPath, rootVal, rootContent);
         sidebarProvider._view?.webview.postMessage({
           type: 'structure',
-          value: result,
+          value: componentStructure,
         });
       } else {
         vscode.window.showInformationMessage(
@@ -56,19 +58,33 @@ export async function activate(context: vscode.ExtensionContext) {
       async (chosenRoot: string) => {
           countFile++;
           console.log("file: ",countFile);
-          const fileNames = await getSvelteFiles(rootPath, true);
+          svelteFiles = await getSvelteFiles(rootPath, true);
           sidebarProvider._view?.webview.postMessage({
             type: 'files',
-            value: [fileNames, chosenRoot],
+            value: [svelteFiles, chosenRoot],
           });
       }
     )
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('svisualize.activate', async (rootVal) => {
-      await vscode.commands.executeCommand('svisualize.sendUri', rootVal);
-      await vscode.commands.executeCommand('svisualize.sendFileNames', rootVal);
+    vscode.commands.registerCommand('svisualize.activate', async (chosenRoot) => {
+      await vscode.commands.executeCommand('svisualize.sendUri', chosenRoot);
+      await vscode.commands.executeCommand('svisualize.sendFileNames', chosenRoot);
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('svisualize.resize', (chosenRoot) =>{
+      sidebarProvider._view?.webview.postMessage({
+        type: 'files',
+        value: [svelteFiles, chosenRoot],
+      });
+
+      sidebarProvider._view?.webview.postMessage({
+        type: 'structure',
+        value: componentStructure,
+      });
     })
   );
 }

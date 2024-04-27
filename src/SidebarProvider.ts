@@ -20,10 +20,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
     webviewView.onDidChangeVisibility(async (e) => {
-      await vscode.commands.executeCommand('svisualize.activate', rootVal);
+      await vscode.commands.executeCommand('svisualize.resize', chosenRoot);
     });
 
-    let rootVal = '';
+    let chosenRoot = '';
     //extension listener for svelte messages
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
@@ -31,22 +31,22 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand('svisualize.activate', rootVal);
+          await vscode.commands.executeCommand('svisualize.resize', chosenRoot);
           break;
         }
         case 'update': {
           if (!data.value) {
             return;
           }
-          await vscode.commands.executeCommand('svisualize.activate', rootVal);
+          await vscode.commands.executeCommand('svisualize.activate', chosenRoot);
           break;
         }
         case 'selection': {
           if (!data.value) {
             return;
           }
-          rootVal = data.value;
-          await vscode.commands.executeCommand('svisualize.activate', rootVal);
+          chosenRoot = data.value;
+          await vscode.commands.executeCommand('svisualize.activate', chosenRoot);
           break;
         }
         case 'uri': {

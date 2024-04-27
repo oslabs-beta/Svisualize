@@ -4,7 +4,7 @@ import { getSvelteFiles } from'./getSvelteFiles';
 import { getSvelteMap } from './SvelteMap';
 
  // Define a class constructor to store files in a hierarchical structure
- class TreeNode {
+ export class TreeNode {
   name: string;
   uri?: string;
   children: TreeNode[];
@@ -17,6 +17,7 @@ import { getSvelteMap } from './SvelteMap';
     this.props = [];
   }
 }
+
 
 export function getComponentStructure(
   rootPath: string,
